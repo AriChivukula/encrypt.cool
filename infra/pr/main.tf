@@ -62,7 +62,6 @@ resource "aws_lambda_function" "ob_lambda" {
 
   environment {
     variables = {
-      TF_VAR_NAME = "${var.NAME}"
       TF_VAR_DOMAIN = "${var.DOMAIN}"
       TF_VAR_BRANCH = "${var.BRANCH}"
       TF_VAR_HONEYCOMB = "${var.HONEYCOMB}"
