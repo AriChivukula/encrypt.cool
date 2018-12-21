@@ -2,8 +2,6 @@ terraform {
   backend "s3" {}
 }
 
-variable "NAME" {}
-
 variable "DOMAIN" {}
 
 provider "aws" {}
@@ -12,7 +10,7 @@ resource "aws_vpc" "ob_vpc" {
   cidr_block = "192.168.0.0/16"
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
   }
 }
 
@@ -25,7 +23,7 @@ resource "aws_subnet" "ob_subnet_public" {
   availability_zone = "${data.aws_availability_zones.ob_azs.names[count.index]}"
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
     Type = "Public"
   }
 }
@@ -34,7 +32,7 @@ resource "aws_internet_gateway" "ob_internet" {
   vpc_id = "${aws_vpc.ob_vpc.id}"
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
   }
 }
 
@@ -42,7 +40,7 @@ resource "aws_route_table" "ob_table_public" {
   vpc_id = "${aws_vpc.ob_vpc.id}"
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
     Type = "Public"
   }
 }
@@ -68,7 +66,7 @@ resource "aws_nat_gateway" "ob_nat" {
   subnet_id = "${aws_subnet.ob_subnet_public.0.id}"
   
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
   }
 }
 
@@ -79,7 +77,7 @@ resource "aws_subnet" "ob_subnet_private" {
   availability_zone = "${data.aws_availability_zones.ob_azs.names[count.index]}"
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
     Type = "Private"
   }
 }
@@ -88,7 +86,7 @@ resource "aws_route_table" "ob_table_private" {
   vpc_id = "${aws_vpc.ob_vpc.id}"
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
     Type = "Private"
   }
 }
@@ -106,7 +104,7 @@ resource "aws_route_table_association" "ob_assoc_private" {
 }
 
 resource "aws_security_group" "ob_security" {
-  name = "${var.NAME}"
+  name = "${var.DOMAIN}"
   vpc_id = "${aws_vpc.ob_vpc.id}"
 
   ingress {
@@ -130,16 +128,16 @@ resource "aws_acm_certificate" "ob_certificate" {
   validation_method = "DNS"
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
   }
 }
 
 resource "aws_s3_bucket" "ob_bucket" {
-  bucket = "${var.NAME}"
+  bucket = "${var.DOMAIN}"
   force_destroy = true
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
   }
 
   versioning {
@@ -151,7 +149,7 @@ resource "aws_route53_zone" "ob_zone" {
   name = "${var.DOMAIN}."
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
   }
 }
 
@@ -174,7 +172,7 @@ resource "aws_acm_certificate_validation" "ob_validation" {
 }
 
 resource "aws_iam_role" "ob_iam" {
-  name = "${var.NAME}"
+  name = "${var.DOMAIN}"
 
   assume_role_policy = <<EOF
 {
