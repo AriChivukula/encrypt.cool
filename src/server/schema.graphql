@@ -1,0 +1,46 @@
+type User {
+  id: ID!
+  email: String!
+}
+
+type Release {
+  id: ID!
+  title: String!
+  subtitle: String!
+}
+
+type Tool {
+  id: ID!
+  icon: String!
+  link: String!
+  title: String!
+}
+
+type Query {
+  me: User
+  loginURL: String!
+  releases: [Release]
+  tools: [Tool]
+}
+
+type AccessToken {
+  accessToken: String!
+}
+
+input LoginInput {
+  code: String!
+}
+
+input LogoutInput {
+  dummy: String!
+}
+
+type Mutation {
+  login(input: LoginInput): AccessToken!
+  logout(input: LogoutInput): AccessToken!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
