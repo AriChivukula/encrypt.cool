@@ -153,7 +153,6 @@ resource "aws_route53_zone" "ob_zone" {
   }
 }
 
-/*
 resource "aws_route53_record" "ob_record" {
   depends_on = [
     "aws_acm_certificate.ob_certificate",
@@ -171,7 +170,7 @@ resource "aws_acm_certificate_validation" "ob_validation" {
   certificate_arn = "${aws_acm_certificate.ob_certificate.arn}"
   validation_record_fqdns = ["${aws_route53_record.ob_record.*.fqdn}"]
 }
-*/
+
 resource "aws_iam_role" "ob_iam" {
   name = "${var.DOMAIN}"
 
