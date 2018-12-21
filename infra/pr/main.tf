@@ -10,6 +10,10 @@ variable "LOCAL_DOMAIN" {}
 
 variable "HONEYCOMB" {}
 
+variable "FUNCTION" {
+  default = "${replace(${var.DOMAIN}-${var.BRANCH}, ".", "-"}"
+}
+
 provider "aws" {}
 
 data "aws_acm_certificate" "ob_certificate" {
@@ -48,7 +52,7 @@ data "aws_subnet_ids" "ob_subnet" {
 }
 
 resource "aws_lambda_function" "ob_lambda" {
-  function_name = "${var.DOMAIN}-${var.BRANCH}"
+  function_name = "${var.FUNCTION}"
   handler = "index.handler"
   role = "${data.aws_iam_role.ob_iam.arn}"
   runtime = "nodejs8.10"
@@ -78,7 +82,7 @@ resource "aws_lambda_function" "ob_lambda" {
 }
 
 resource "aws_api_gateway_rest_api" "ob_api" {
-  name = "${var.DOMAIN}-${var.BRANCH}"
+  name = "${var.FUNCTION}"
 }
 
 resource "aws_api_gateway_resource" "ob_resource" {
@@ -139,7 +143,7 @@ resource "aws_api_gateway_base_path_mapping" "ob_map" {
 resource "aws_lambda_permission" "ob_permission" {
   statement_id = "AllowAPIGatewayInvoke"
   action = "lambda:InvokeFunction"
-  function_name = "${var.DOMAIN}-${var.BRANCH}"
+  function_name = "${var.FUNCTION}"
   principal = "apigateway.amazonaws.com"
   source_arn = "${aws_api_gateway_deployment.ob_deployment.execution_arn}/*/*"
 }
