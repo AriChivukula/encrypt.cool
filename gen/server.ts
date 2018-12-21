@@ -35,3 +35,12 @@ export const utility: Module = Module.new({
   ],
   destination: "src/server/utility.ts",
 });
+
+export const qr: Module = Module.new({
+  content: [
+    Bespoke.new({
+      name: "custom",
+    }),
+  ],
+  destination: "src/server/qr.ts",
+});
