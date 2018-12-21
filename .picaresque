@@ -14,12 +14,6 @@
   "GITHUB_USER": {
     "description": "GitHub User"
   },
-  "TF_VAR_CLIENT_ID": {
-    "description": "Google ID"
-  },
-  "TF_VAR_CLIENT_SECRET": {
-    "description": "Google secret"
-  },
   "TF_VAR_DOMAIN": {
     "description": "Domain"
   },
