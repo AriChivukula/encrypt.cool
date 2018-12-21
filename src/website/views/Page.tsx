@@ -39,20 +39,10 @@ class _Page extends React.Component<IPageProps> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    const urlParts: URL = new URL(window.location.href);
     // @ts-ignore
     const ProgressJSX = <LinearProgress determinate={false} />;
     if (this.props.data === null) {
       return ProgressJSX;
-    } else if (urlParts.searchParams.has("code")) {
-      // @ts-ignore
-      const TopBarJSX = <TopBar {...this.props} />;
-      return (
-        <>
-          {TopBarJSX}
-          {ProgressJSX}
-        </>
-      );
     } else {
       // @ts-ignore
       const TopBarJSX = <TopBar {...this.props} />;
