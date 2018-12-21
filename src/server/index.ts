@@ -10,7 +10,7 @@
 import "@babel/polyfill";
 require("honeycomb-beeline")({
   writeKey: process.env.TF_VAR_HONEYCOMB,
-  dataset: "Encrypt.Cool"
+  dataset: process.env.TF_VAR_DOMAIN,
 });
 
 import lambda from "aws-serverless-express";
