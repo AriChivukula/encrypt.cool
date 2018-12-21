@@ -184,46 +184,6 @@ locals {
       file = "images/favicon.png"
       type = "image/png"
     },
-    {
-      file = "images/v0.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v1.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v2.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v3.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v4.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v5.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v6.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v7.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v8.jpg"
-      type = "image/jpeg"
-    },
-    {
-      file = "images/v9.jpg"
-      type = "image/jpeg"
-    },
   ]
 }
 
