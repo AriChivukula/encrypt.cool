@@ -3,11 +3,11 @@ import {
   Module,
 } from "typescriptase";
 
-export const google: Module = Module.new({
+export const encrypt: Module = Module.new({
   content: [
     Bespoke.new({
       name: "custom",
     }),
   ],
-  destination: "src/test/google.ts",
+  destination: "src/test/encrypt.ts",
 });
