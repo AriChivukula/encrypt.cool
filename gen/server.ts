@@ -9,15 +9,6 @@ export const server: Module = Module.new({
   destination: "src/server/server.ts",
 });
 
-export const google: Module = Module.new({
-  content: [
-    Bespoke.new({
-      name: "custom",
-    }),
-  ],
-  destination: "src/server/google.ts",
-});
-
 export const index: Module = Module.new({
   content: [
     Bespoke.new({
