@@ -4,8 +4,6 @@ terraform {
 
 variable "BRANCH" {}
 
-variable "NAME" {}
-
 variable "DOMAIN" {}
 
 variable "LOCAL_DOMAIN" {}
@@ -19,11 +17,11 @@ data "aws_acm_certificate" "ob_certificate" {
 }
 
 data "aws_s3_bucket" "ob_bucket" {
-  bucket = "${var.NAME}"
+  bucket = "${var.DOMAIN}"
 }
 
 data "aws_iam_role" "ob_iam" {
-  name = "${var.NAME}"
+  name = "${var.DOMAIN}"
 }
 
 data "aws_route53_zone" "ob_zone" {
@@ -31,13 +29,13 @@ data "aws_route53_zone" "ob_zone" {
 }
 
 data "aws_security_group" "ob_security" {
-  name = "${var.NAME}"
+  name = "${var.DOMAIN}"
 }
 
 data "aws_vpc" "ob_vpc" {
   filter {
     name = "tag:Name"
-    values = ["${var.NAME}"]
+    values = ["${var.DOMAIN}"]
   }
 }
 
@@ -50,7 +48,7 @@ data "aws_subnet_ids" "ob_subnet" {
 }
 
 resource "aws_lambda_function" "ob_lambda" {
-  function_name = "${var.NAME}-${var.BRANCH}"
+  function_name = "${var.DOMAIN}-${var.BRANCH}"
   handler = "index.handler"
   role = "${data.aws_iam_role.ob_iam.arn}"
   runtime = "nodejs8.10"
@@ -75,12 +73,12 @@ resource "aws_lambda_function" "ob_lambda" {
   }
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
   }
 }
 
 resource "aws_api_gateway_rest_api" "ob_api" {
-  name = "${var.NAME}-${var.BRANCH}"
+  name = "${var.DOMAIN}-${var.BRANCH}"
 }
 
 resource "aws_api_gateway_resource" "ob_resource" {
@@ -141,7 +139,7 @@ resource "aws_api_gateway_base_path_mapping" "ob_map" {
 resource "aws_lambda_permission" "ob_permission" {
   statement_id = "AllowAPIGatewayInvoke"
   action = "lambda:InvokeFunction"
-  function_name = "${var.NAME}-${var.BRANCH}"
+  function_name = "${var.DOMAIN}-${var.BRANCH}"
   principal = "apigateway.amazonaws.com"
   source_arn = "${aws_api_gateway_deployment.ob_deployment.execution_arn}/*/*"
 }
@@ -182,7 +180,7 @@ locals {
 
 resource "aws_s3_bucket_object" "ob_object" {
   count = "${length(local.files)}"
-  bucket = "${var.NAME}"
+  bucket = "${var.DOMAIN}"
   key = "${var.BRANCH}/${lookup(local.files[count.index], "file")}"
   source = "static/${lookup(local.files[count.index], "file")}"
   acl = "public-read"
@@ -233,7 +231,7 @@ resource "aws_cloudfront_distribution" "ob_distribution" {
   }
 
   tags {
-    Name = "${var.NAME}"
+    Name = "${var.DOMAIN}"
   }
 
   viewer_certificate {
