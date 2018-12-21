@@ -1,1 +1,1 @@
-# encrypt.cool
+# Encrypt.Cool
