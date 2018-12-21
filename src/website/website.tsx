@@ -11,7 +11,6 @@ import * as cookie from "js-cookie";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {
-  authMiddleware,
   RelayNetworkLayer,
   urlMiddleware,
 // @ts-ignore
@@ -40,10 +39,6 @@ export function render(
   const environment: Environment = new Environment({
     network: new RelayNetworkLayer([
       urlMiddleware({ url: apiURL }),
-      authMiddleware({
-        allowEmptyToken: true,
-        token: (): string => cookie.get("accessToken") || "",
-      }),
     ]),
     store: new Store(new RecordSource()),
   });
