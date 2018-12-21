@@ -75,7 +75,6 @@ gulp.task(
     }))
     .pipe(replace("ENV_BRANCH", process.env.TF_VAR_BRANCH))
     .pipe(replace("ENV_DOMAIN", process.env.TF_VAR_DOMAIN))
-    .pipe(replace("ENV_NAME", process.env.TF_VAR_NAME))
     .pipe(gulp.dest("build/2/website")),
 );
 
