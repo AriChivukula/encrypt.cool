@@ -12,7 +12,7 @@ variable "HONEYCOMB" {}
 
 resource "null_resource" "intermediates" {
     triggers = {
-        function_name = "${replace("${var.DOMAIN}-${var.BRANCH}", ".", "-"}"
+        function_name = "${replace("${var.DOMAIN}-${var.BRANCH}", ".", "-")}"
     }
 }
 
