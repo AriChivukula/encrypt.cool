@@ -36,11 +36,11 @@ export const utility: Module = Module.new({
   destination: "src/server/utility.ts",
 });
 
-export const qr: Module = Module.new({
+export const encrypt: Module = Module.new({
   content: [
     Bespoke.new({
       name: "custom",
     }),
   ],
-  destination: "src/server/qr.ts",
+  destination: "src/server/encrypt.ts",
 });
