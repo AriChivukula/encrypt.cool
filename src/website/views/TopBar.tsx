@@ -2,18 +2,11 @@
  * This file is partially generated; only edit bespoke sections.
  *
  * SOURCE<<gen/website.ts::TopBar>>
- * BESPOKE<<imports, render, implementation, relay>>
- * SIGNED<<fznzArZlUDYhf0Irty2mNWYJZotkpUrVequEbyJVDOU4i1tWcgfuWA4eWq9G6nsed6pD2/mjQfdKfTHC+gIniw==>>
+ * BESPOKE<<imports, render, implementation>>
+ * SIGNED<<kHq6yzfWokPWNCMfURWlsAo7OaNhM+PwwwMO6Te6t8SJLQwaTPwqNT1Wxn/7796cljUiKz+Kte+BHsjRUX9YnQ==>>
  */
 
 import * as React from "react";
-import {
-  commitMutation,
-  createFragmentContainer,
-  graphql,
-  MappedFragmentProps,
-  RemoveRelayProp,
-} from "react-relay";
 
 /* BESPOKE START <<imports>> */
 import * as cookie from "js-cookie";
@@ -35,10 +28,9 @@ import {
 /* BESPOKE END <<imports>> */
 
 export interface ITopBarProps {
-  data: TopBarQuery;
 }
 
-class __TopBar extends React.Component<ITopBarProps> {
+class _TopBar extends React.Component<ITopBarProps> {
 
   public render(
   ): JSX.Element {
@@ -62,18 +54,5 @@ class __TopBar extends React.Component<ITopBarProps> {
   /* BESPOKE START <<implementation>> */
   /* BESPOKE END <<implementation>> */
 }
-
-const _TopBar: React.ComponentType<MappedFragmentProps<RemoveRelayProp<ITopBarProps>>> = createFragmentContainer(
-  __TopBar,
-  /* BESPOKE START <<relay>> */
-  graphql`
-    fragment TopBarQuery on Query {
-      me {
-        id
-      }
-    }
-  `,
-  /* BESPOKE END <<relay>> */
-);
 
 export { _TopBar as TopBar };

@@ -2,16 +2,14 @@
  * This file is partially generated; only edit bespoke sections.
  *
  * SOURCE<<gen/website.ts::Content>>
- * BESPOKE<<imports, render, implementation, relay>>
- * SIGNED<<0LZX0PmRN5L/T0xOoPH2438jXkgZ4eFMq+XtZ/pyVuEFIyfNW/jjsRGPiF+eSVU1UPvW03SLl2ce1lV48AiGHw==>>
+ * BESPOKE<<imports, render, implementation>>
+ * SIGNED<<+uZddPja4VcAK0x65kugOhcCE2MsgaH+Cm+PDJxrRkZ5mbYfzpj29sAnrvzkT7LpLplGLgUYmjzEB1UsWI0aTw==>>
  */
 
 import * as React from "react";
 import {
-  createFragmentContainer,
+  commitMutation,
   graphql,
-  MappedFragmentProps,
-  RemoveRelayProp,
 } from "react-relay";
 
 /* BESPOKE START <<imports>> */
@@ -39,10 +37,9 @@ import {
 /* BESPOKE END <<imports>> */
 
 export interface IContentProps {
-  data: ContentQuery;
 }
 
-class __Content extends React.Component<IContentProps> {
+class _Content extends React.Component<IContentProps> {
 
   public render(
   ): JSX.Element {
@@ -62,18 +59,5 @@ class __Content extends React.Component<IContentProps> {
   /* BESPOKE START <<implementation>> */
   /* BESPOKE END <<implementation>> */
 }
-
-const _Content: React.ComponentType<MappedFragmentProps<RemoveRelayProp<IContentProps>>> = createFragmentContainer(
-  __Content,
-  /* BESPOKE START <<relay>> */
-  graphql`
-    fragment ContentQuery on Query {
-      me {
-        id
-      }
-    }
-  `,
-  /* BESPOKE END <<relay>> */
-);
 
 export { _Content as Content };

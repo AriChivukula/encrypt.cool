@@ -3,7 +3,7 @@
  *
  * SOURCE<<gen/website.ts::Page>>
  * BESPOKE<<imports, render, implementation>>
- * SIGNED<<uiHZWck8TbLb4b455x7GYdRIQ+FwbgTyiIg8tLSEQoXfr+zh6N9RJusY7Qe/i014G74hTF4jmq6sUDR1aSLyjA==>>
+ * SIGNED<<70OzGx3k9jU70J1TfE8zTYk+sMEbqpfVGh7Q5s3YjBT7d+nRLVvFCwXlAPGOupx9aarIQGahvyelLV6TY0shog==>>
  */
 
 import * as React from "react";
@@ -25,7 +25,6 @@ import {
 /* BESPOKE END <<imports>> */
 
 export interface IPageProps {
-  data: TopBarQuery | ContentQuery | null;
 }
 
 class _Page extends React.Component<IPageProps> {
