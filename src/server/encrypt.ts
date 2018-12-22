@@ -42,12 +42,12 @@ export function encryptContent(hint: string, message: string, password: string, 
 }
 
 export function decryptContent(metaData: ECMetaData, password: string): ECData {
-  if metaData.version !== 0 {
+  if (metaData.version !== 0) {
     throw new Error("BAD_VERSION");
   }
   const hash = metaData.hash;
   metaData.hash = "";
-  if Encrypter(HMAC_PASSWORD).hmac(JSON.stringify(metaData)) !== hash {
+  if (Encrypter(HMAC_PASSWORD).hmac(JSON.stringify(metaData)) !== hash) {
     throw new Error("BAD_HASH");
   }
   return Encrypter(password).decrypt(metaData.data)
