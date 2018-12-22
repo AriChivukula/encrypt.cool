@@ -33,7 +33,7 @@ class _Root extends React.Component<IRootProps> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    return <Page environment={environment} />;
+    return <Page environment={this.props.environment} />;
     /* BESPOKE END <<render>> */
   }
 
