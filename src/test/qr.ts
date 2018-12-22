@@ -35,7 +35,7 @@ it(
     const password = "PASSWORDPASSWORDPASSWORDPASSWORD";
     const metaData = encryptContent("HINT", "MESSAGE", password, "192.168.0.1");
     const url = URI_PREFIX + encodeURIComponent(JSON.stringify(metaData));
-    const data = await decodeQR(url, password);
+    const data = decodeQR(url, password);
     chai.expect(data.created).to.not.be.empty;
     chai.expect(data.ip).to.equal("192.168.0.1");
     chai.expect(data.message).to.equal("MESSAGE");
