@@ -22,7 +22,7 @@ export const Content: Module = React({
   destination: "src/website/views/Content.tsx",
   name: "Content",
   props: [],
-  relayType: ERelayType.FRAGMENT,
+  relayMutation: true,
 });
 
 export const FourOhFour: Module = React({
@@ -33,12 +33,7 @@ export const FourOhFour: Module = React({
 export const Page: Module = React({
   destination: "src/website/views/Page.tsx",
   name: "Page",
-  props: [
-    Type.Required.new({
-      name: "data",
-      types: ["TopBarQuery", "ContentQuery", "null"],
-    }),
-  ],
+  props: [],
 });
 
 export const Root: Module = React({
@@ -56,8 +51,6 @@ export const TopBar: Module = React({
   destination: "src/website/views/TopBar.tsx",
   name: "TopBar",
   props: [],
-  relayMutation: true,
-  relayType: ERelayType.FRAGMENT,
 });
 
 export const website: Module = Module.new({
