@@ -1,4 +1,10 @@
-type Query
+type Dummy {
+  id: ID!
+}
+
+type Query {
+  dummy: Dummy!
+}
 
 input GenerateQRCodeImageInput {
   hint: String!
