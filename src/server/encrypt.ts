@@ -36,8 +36,7 @@ export function encryptContent(hint: string, message: string, password: string, 
     hint,
     version: 0,
   };
-  const hash = encrypter.hmac(metaData);
-  metaData.hash = hash;
+  metaData.hash = encrypter.hmac(JSON.stringify(metaData));
   return metaData;
 }
 
