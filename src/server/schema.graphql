@@ -6,6 +6,32 @@ type Query {
   me: User
 }
 
+input GenerateQRCodeImageInput {
+  code: String!
+  hint: String!
+  message: String!
+  password: String!
+}
+
+type GenerateQRCodeImageOutput {
+  data: String!
+}
+
+input DecodeQRCodeURLInput {
+  url: String!
+  password: String!
+}
+
+type DecodeQRCodeURLOutput {
+  message: String!
+}
+
+type Mutation {
+  generateQRCodeImage(input: GenerateQRCodeImageInput): GenerateQRCodeImageOutput!
+  decodeQRCodeURL(input: DecodeQRCodeURLInput): DecodeQRCodeURLOutput!
+}
+
 schema {
   query: Query
+  mutation: Mutation
 }
