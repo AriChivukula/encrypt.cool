@@ -3,7 +3,7 @@
  *
  * SOURCE<<gen/website.ts::Page>>
  * BESPOKE<<imports, render, implementation>>
- * SIGNED<<70OzGx3k9jU70J1TfE8zTYk+sMEbqpfVGh7Q5s3YjBT7d+nRLVvFCwXlAPGOupx9aarIQGahvyelLV6TY0shog==>>
+ * SIGNED<<ED3FU4uBK8YRwXFiGLPvj4bzV5Er6yFlu/omFcZAvt8I4B/+qYZ3R7mHo2PfE+lWONecQVi+87DCgWGcoJlj8w==>>
  */
 
 import * as React from "react";
@@ -22,6 +22,7 @@ import {
 /* BESPOKE END <<imports>> */
 
 export interface IPageProps {
+  environment: Environment;
 }
 
 class _Page extends React.Component<IPageProps> {

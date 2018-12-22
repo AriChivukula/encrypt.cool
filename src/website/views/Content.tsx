@@ -3,7 +3,7 @@
  *
  * SOURCE<<gen/website.ts::Content>>
  * BESPOKE<<imports, render, implementation>>
- * SIGNED<<+uZddPja4VcAK0x65kugOhcCE2MsgaH+Cm+PDJxrRkZ5mbYfzpj29sAnrvzkT7LpLplGLgUYmjzEB1UsWI0aTw==>>
+ * SIGNED<<EPKHcY/ruhFuvY0+EvoKqN1QLmmmZF4u4zM4FvhttKcFVCgjQmhKcIaAD+ZtFB3NTEE8TBaAS/pJDqALOQXFJg==>>
  */
 
 import * as React from "react";
@@ -37,6 +37,7 @@ import {
 /* BESPOKE END <<imports>> */
 
 export interface IContentProps {
+  environment: Environment;
 }
 
 class _Content extends React.Component<IContentProps> {
