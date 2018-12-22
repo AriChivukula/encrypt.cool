@@ -30,11 +30,11 @@ export async function genRoot(
       async (): Promise<object | null> => null,
     ),
     generateQRCodeImage: async ({ input }: { input: { hint: string, message: string, password: string } }): Promise<{ data: string }> => {
-      const data = await encodeQR(hint, message, password, getClientIp(req));
+      const data = await encodeQR(input.hint, input.message, input.password, getClientIp(req));
       return { data };
     },
     decodeQRCodeURL: async ({ input }: { input: { url: string, password: string } }): Promise<{ message: string }> => {
-      const data = decodeQR(url, password);
+      const data = decodeQR(input.url, input.password);
       return { message: data.message };
     },
   };
