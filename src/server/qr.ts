@@ -15,6 +15,7 @@ import {
 import {
   decryptContent,
   encryptContent,
+  ECData,
 } from "./encrypt";
 
 const URI_PREFIX = "https://encrypt.cool/decrypt?metadata=";
@@ -22,11 +23,11 @@ const URI_PREFIX = "https://encrypt.cool/decrypt?metadata=";
 export async function encodeQR(hint: string, message: string, password: string, ip: string): Promise<string> {
   const metaData = await encryptContent(hint, message, password, ip);
   const url = URI_PREFIX + encodeURIComponent(JSON.stringify(metaData));
-  return await QRCode.toDataURL(url);
+  return await toDataURL(url);
 }
 
 export function decodeQR(url: string, password: string): ECData {
-  const content = url.replace(URI_PREFIX, string);
+  const content = url.replace(URI_PREFIX, url);
   const metaData = JSON.parse(decodeURIComponent(content));
   return decryptContent(metaData, password);
 }
