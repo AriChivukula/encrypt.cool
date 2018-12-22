@@ -8,7 +8,14 @@
 
 /* BESPOKE START <<custom>> */
 import * as express from "express";
+import {
+  getClientIp,
+} from "request-ip";
 
+import {
+  encodeQR,
+  decodeQR,
+} from "./qr";
 import {
   genNullOnThrow,
 } from "./utility";
@@ -22,6 +29,14 @@ export async function genRoot(
       // @ts-ignore
       async (): Promise<object | null> => null,
     ),
+    generateQRCodeImage: async ({ input }: { input: { hint: string, message: string, password: string } }): Promise<{ data: string }> => {
+      const data = await encodeQR(hint, message, password, getClientIp(req));
+      return { data };
+    },
+    decodeQRCodeURL: async ({ input }: { input: { url: string, password: string } }): Promise<{ message: string }> => {
+      const data = decodeQR(url, password);
+      return { message: data.message };
+    },
   };
 }
 /* BESPOKE END <<custom>> */
