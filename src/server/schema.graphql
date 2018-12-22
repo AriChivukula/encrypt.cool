@@ -1,10 +1,4 @@
-type User {
-  id: ID!
-}
-
-type Query {
-  me: User
-}
+type Query
 
 input GenerateQRCodeImageInput {
   hint: String!
