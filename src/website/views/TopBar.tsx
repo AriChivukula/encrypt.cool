@@ -22,9 +22,6 @@ import {
 import {
   goto,
 } from "../utility";
-import {
-  TopBarQuery,
-} from "./__generated__/TopBarQuery.graphql";
 /* BESPOKE END <<imports>> */
 
 export interface ITopBarProps {
