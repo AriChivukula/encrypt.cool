@@ -36,10 +36,6 @@ import {
 import {
   goto,
 } from "../utility";
-
-import {
-  ContentQuery,
-} from "./__generated__/ContentQuery.graphql";
 /* BESPOKE END <<imports>> */
 
 export interface IContentProps {
