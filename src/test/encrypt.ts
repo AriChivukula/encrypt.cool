@@ -28,6 +28,13 @@ it(
 );
 
 it(
+  "encryptContentFailure",
+  async (): Promise<void> => {
+    expect(() => encryptContent("HINT", "MESSAGE", "SHORT_PASSWORD", "192.168.0.1")).to.throw("BAD_PASSWORD");
+  },
+);
+
+it(
   "decryptContent",
   async (): Promise<void> => {
     const password = "PASSWORDPASSWORDPASSWORDPASSWORD";
@@ -36,6 +43,18 @@ it(
     chai.expect(data.created).should.not.be.empty;
     chai.expect(data.ip).to.equal("192.168.0.1");
     chai.expect(data.message).to.equal("MESSAGE");
+  },
+);
+
+it(
+  "decryptContentFailure",
+  async (): Promise<void> => {
+    const metaData = encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
+    expect(() => decryptContent(data, "BAD_PASSWORD_BAD_PASSWORD_BAD_PASSWORD_")).to.throw("BAD_PASSWORD");
+    metaData.hash = "BADHASH";
+    expect(() => decryptContent(data, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_HASH");
+    metaData.version = 1;
+    expect(() => decryptContent(data, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_VERSION");
   },
 );
 /* BESPOKE END <<custom>> */
