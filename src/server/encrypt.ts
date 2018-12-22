@@ -26,6 +26,9 @@ export type ECMetaData = {
 const HMAC_PASSWORD = "0123456789ABCDEF";
 
 export function encryptContent(hint: string, message: string, password: string, ip: string): ECMetaData {
+  if (password.length < 16) {
+    throw new Error("BAD_PASSWORD");
+  }
   const data = {
     created: (new Date()).toUTCString(),
     ip,
