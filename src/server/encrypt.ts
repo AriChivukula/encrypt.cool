@@ -32,7 +32,7 @@ export type ECMetaData = {
 export function encryptContent(hint: string, message: string, password: string, request: Request): ECMetaData {
   const data = {
     created: (new Date()).toUTCString(),
-    ip: getClientIp(request)
+    ip: getClientIp(request),
     message,
   };
   const encrypter = Encrypter(password);
@@ -42,7 +42,7 @@ export function encryptContent(hint: string, message: string, password: string, 
     hint,
     version: 0,
   };
-  const hash = encryptor.hmac(metaData);
+  const hash = encrypter.hmac(metaData);
   metaData.hash = hash;
   return metaData;
 }
