@@ -25,10 +25,9 @@ export async function genRoot(
   res: express.Response,
 ): Promise<object> {
   return {
-    me: async (): Promise<object | null> => await genNullOnThrow(
-      // @ts-ignore
-      async (): Promise<object | null> => null,
-    ),
+    dummy: async (): Promise<{ id: number }> => {
+      return { id: 0 };
+    },
     generateQRCodeImage: async ({ input }: { input: { hint: string, message: string, password: string } }): Promise<{ data: string }> => {
       const data = await encodeQR(input.hint, input.message, input.password, getClientIp(req));
       return { data };
