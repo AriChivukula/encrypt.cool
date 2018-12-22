@@ -19,5 +19,8 @@
   },
   "TF_VAR_HONEYCOMB": {
     "description": "Honeycomb server token"
+  },
+  "TF_VAR_HMAC_PASSWORD": {
+    "description": "Used to secure unencrypted meta-data"
   }
 }
