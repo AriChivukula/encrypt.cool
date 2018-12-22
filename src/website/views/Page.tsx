@@ -29,16 +29,10 @@ class _Page extends React.Component<IPageProps> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    // @ts-ignore
-    const TopBarJSX = <TopBar {...this.props} />;
-    // @ts-ignore
-    const ContentJSX = <Content {...this.props} />;
-    return (
-      <>
-        {TopBarJSX}
-        {ContentJSX}
-      </>
-    );
+    return <>
+        <TopBar />
+        <Content environment={this.props.environment} />
+    </>
     /* BESPOKE END <<render>> */
   }
 
