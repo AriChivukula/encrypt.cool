@@ -20,12 +20,6 @@ import {
 } from "relay-runtime";
 
 import {
-  ContentQuery,
-} from "./__generated__/ContentQuery.graphql";
-import {
-  TopBarQuery,
-} from "./__generated__/TopBarQuery.graphql";
-import {
   Page,
 } from "./Page";
 /* BESPOKE END <<imports>> */
