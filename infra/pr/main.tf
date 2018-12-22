@@ -10,6 +10,8 @@ variable "LOCAL_DOMAIN" {}
 
 variable "HONEYCOMB" {}
 
+variable "HMAC_PASSWORD" {}
+
 resource "null_resource" "intermediates" {
     triggers = {
         function_name = "${replace("${var.DOMAIN}-${var.BRANCH}", ".", "-")}"
@@ -69,6 +71,7 @@ resource "aws_lambda_function" "ob_lambda" {
       TF_VAR_DOMAIN = "${var.DOMAIN}"
       TF_VAR_BRANCH = "${var.BRANCH}"
       TF_VAR_HONEYCOMB = "${var.HONEYCOMB}"
+      TF_VAR_HMAC_PASSWORD = "${var.HMAC_PASSWORD}"
       DEBUG = "*"
     }
   }
