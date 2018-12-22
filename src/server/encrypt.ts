@@ -50,7 +50,11 @@ export function decryptContent(metaData: ECMetaData, password: string): ECData {
   if (Encrypter(HMAC_PASSWORD).hmac(JSON.stringify(metaData)) !== hash) {
     throw new Error("BAD_HASH");
   }
-  return Encrypter(password).decrypt(metaData.data)
+  const data = Encrypter(password).decrypt(metaData.data);
+  if (data === null) {
+    throw new Error("BAD_PASSWORD");
+  }
+  return data
 }
 
 /* BESPOKE END <<custom>> */
