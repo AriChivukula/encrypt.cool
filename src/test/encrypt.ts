@@ -12,8 +12,8 @@ import "mocha";
 import * as chai from "chai";
 
 import {
+  decryptContent,
   encryptContent,
-  ECMetaData,
 } from "../server/encrypt";
 
 it(
@@ -24,6 +24,18 @@ it(
     chai.expect(metaData.hash).to.equal("d2323d29e3f460a525c9827d9fdc0fbc1eab896857c22a2f952277504be55a9e");
     chai.expect(metaData.hint).to.equal("HINT");
     chai.expect(metaData.version).to.equal(0);
+  },
+);
+
+it(
+  "decryptContent",
+  async (): Promise<void> => {
+    const password = "PASSWORDPASSWORDPASSWORDPASSWORD";
+    const metaData = encryptContent("HINT", "MESSAGE", password, "192.168.0.1");
+    const data = decryptContent(data, password);
+    chai.expect(data.created).should.not.be.empty;
+    chai.expect(data.ip).to.equal("192.168.0.1");
+    chai.expect(data.message).to.equal("MESSAGE");
   },
 );
 /* BESPOKE END <<custom>> */
