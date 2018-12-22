@@ -9,12 +9,6 @@
 /* BESPOKE START <<custom>> */
 
 import Encrypter from "simple-encryptor";
-import {
-  Request,
-} from "express";
-import {
-  getClientIp,
-} from "request-ip";
 
 export type ECData = {
   created: string;
@@ -29,10 +23,10 @@ export type ECMetaData = {
   version: number;
 }
 
-export function encryptContent(hint: string, message: string, password: string, request: Request): ECMetaData {
+export function encryptContent(hint: string, message: string, password: string, ip: string): ECMetaData {
   const data = {
     created: (new Date()).toUTCString(),
-    ip: getClientIp(request),
+    ip,
     message,
   };
   const encrypter = Encrypter(password);
