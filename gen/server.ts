@@ -44,3 +44,12 @@ export const encrypt: Module = Module.new({
   ],
   destination: "src/server/encrypt.ts",
 });
+
+export const qr: Module = Module.new({
+  content: [
+    Bespoke.new({
+      name: "custom",
+    }),
+  ],
+  destination: "src/server/qr.ts",
+});
