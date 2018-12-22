@@ -25,6 +25,7 @@ it(
   "encodeQR",
   async (): Promise<void> => {
     const qr = encodeQR("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
+    console.log(qr);
     chai.expect(qr).to.not.be.empty;
   },
 );
