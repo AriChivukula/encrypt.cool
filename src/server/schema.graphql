@@ -1,9 +1,9 @@
-type User {
+type Dummy {
   id: ID!
 }
 
 type Query {
-  me: User
+  dummy: Dummy!
 }
 
 input GenerateQRCodeImageInput {

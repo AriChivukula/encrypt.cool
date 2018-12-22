@@ -3,25 +3,19 @@
  *
  * SOURCE<<gen/website.ts::Page>>
  * BESPOKE<<imports, render, implementation>>
- * SIGNED<<uiHZWck8TbLb4b455x7GYdRIQ+FwbgTyiIg8tLSEQoXfr+zh6N9RJusY7Qe/i014G74hTF4jmq6sUDR1aSLyjA==>>
+ * SIGNED<<ED3FU4uBK8YRwXFiGLPvj4bzV5Er6yFlu/omFcZAvt8I4B/+qYZ3R7mHo2PfE+lWONecQVi+87DCgWGcoJlj8w==>>
  */
 
 import * as React from "react";
 
 /* BESPOKE START <<imports>> */
 import {
-  LinearProgress,
-} from "rmwc/LinearProgress";
+  Environment,
+} from "relay-runtime";
 import {
   Url,
 } from "url";
 
-import {
-  ContentQuery,
-} from "./__generated__/ContentQuery.graphql";
-import {
-  TopBarQuery,
-} from "./__generated__/TopBarQuery.graphql";
 import {
   Content,
 } from "./Content";
@@ -31,7 +25,7 @@ import {
 /* BESPOKE END <<imports>> */
 
 export interface IPageProps {
-  data: TopBarQuery | ContentQuery | null;
+  environment: Environment;
 }
 
 class _Page extends React.Component<IPageProps> {
@@ -39,22 +33,10 @@ class _Page extends React.Component<IPageProps> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    // @ts-ignore
-    const ProgressJSX = <LinearProgress determinate={false} />;
-    if (this.props.data === null) {
-      return ProgressJSX;
-    } else {
-      // @ts-ignore
-      const TopBarJSX = <TopBar {...this.props} />;
-      // @ts-ignore
-      const ContentJSX = <Content {...this.props} />;
-      return (
-        <>
-          {TopBarJSX}
-          {ContentJSX}
-        </>
-      );
-    }
+    return <>
+        <TopBar />
+        <Content environment={this.props.environment} />
+    </>
     /* BESPOKE END <<render>> */
   }
 

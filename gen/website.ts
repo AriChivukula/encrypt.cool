@@ -21,8 +21,13 @@ export const utility: Module = Module.new({
 export const Content: Module = React({
   destination: "src/website/views/Content.tsx",
   name: "Content",
-  props: [],
-  relayType: ERelayType.FRAGMENT,
+  props: [
+    Type.Required.new({
+      name: "environment",
+      type: "Environment",
+    }),
+  ],
+  relayMutation: true,
 });
 
 export const FourOhFour: Module = React({
@@ -35,8 +40,8 @@ export const Page: Module = React({
   name: "Page",
   props: [
     Type.Required.new({
-      name: "data",
-      types: ["TopBarQuery", "ContentQuery", "null"],
+      name: "environment",
+      type: "Environment",
     }),
   ],
 });
@@ -56,8 +61,6 @@ export const TopBar: Module = React({
   destination: "src/website/views/TopBar.tsx",
   name: "TopBar",
   props: [],
-  relayMutation: true,
-  relayType: ERelayType.FRAGMENT,
 });
 
 export const website: Module = Module.new({
