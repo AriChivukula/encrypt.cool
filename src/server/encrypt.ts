@@ -23,8 +23,6 @@ export type ECMetaData = {
   version: number;
 }
 
-const HMAC_PASSWORD = "0123456789ABCDEF";
-
 export function encryptContent(hint: string, message: string, password: string, ip: string): ECMetaData {
   if (password.length < 16) {
     throw new Error("BAD_PASSWORD");
@@ -40,7 +38,7 @@ export function encryptContent(hint: string, message: string, password: string, 
     hint,
     version: 0,
   };
-  metaData.hash = Encrypter(HMAC_PASSWORD).hmac(JSON.stringify(metaData));
+  metaData.hash = Encrypter(process.env.TF_VAR_HMAC_PASSWORD).hmac(JSON.stringify(metaData));
   return metaData;
 }
 
@@ -50,7 +48,7 @@ export function decryptContent(metaData: ECMetaData, password: string): ECData {
   }
   const hash = metaData.hash;
   metaData.hash = "";
-  if (Encrypter(HMAC_PASSWORD).hmac(JSON.stringify(metaData)) !== hash) {
+  if (Encrypter(process.env.TF_VAR_HMAC_PASSWORD).hmac(JSON.stringify(metaData)) !== hash) {
     throw new Error("BAD_HASH");
   }
   const data = Encrypter(password).decrypt(metaData.data);
