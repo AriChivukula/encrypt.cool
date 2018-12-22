@@ -17,12 +17,6 @@ import {
 } from "url";
 
 import {
-  ContentQuery,
-} from "./__generated__/ContentQuery.graphql";
-import {
-  TopBarQuery,
-} from "./__generated__/TopBarQuery.graphql";
-import {
   Content,
 } from "./Content";
 import {
