@@ -61,6 +61,13 @@ class _Content extends React.Component<IContentProps> {
   }
 
   /* BESPOKE START <<implementation>> */
+  private generateQRCodeImage(
+    hint: string,
+    message: string,
+    password: string,
+  ): void {
+      // TODO
+  }
   /* BESPOKE END <<implementation>> */
 }
 
