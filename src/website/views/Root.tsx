@@ -33,27 +33,7 @@ class _Root extends React.Component<IRootProps> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    return (
-      <QueryRenderer
-        environment={this.props.environment}
-        variables={{}}
-        query={graphql`
-          query RootQuery {
-            ...ContentQuery
-            ...TopBarQuery
-          }
-        `}
-        render={({error, props}: {error: Error | null; props: TopBarQuery | ContentQuery}): JSX.Element => {
-          if (error !== null) {
-            console.log(error);
-
-            return <div />;
-          } else {
-            return <Page data={props} />;
-          }
-        }}
-      />
-    );
+    return <Page environment={environment} />;
     /* BESPOKE END <<render>> */
   }
 
