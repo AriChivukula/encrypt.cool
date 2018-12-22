@@ -11,9 +11,14 @@ import "mocha";
 
 import * as chai from "chai";
 
+
+import {
+  encryptContent,
+} from "../server/encrypt";
 import {
   encodeQR,
   decodeQR,
+  URI_PREFIX,
 } from "../server/qr";
 
 it(
