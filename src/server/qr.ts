@@ -18,7 +18,7 @@ import {
   ECData,
 } from "./encrypt";
 
-export const URI_PREFIX = "https://encrypt.cool/decrypt?metadata=";
+export const URI_PREFIX = "https://encrypt.cool/?metadata=";
 
 export async function encodeQR(hint: string, message: string, password: string, ip: string): Promise<string> {
   const metaData = await encryptContent(hint, message, password, ip);
