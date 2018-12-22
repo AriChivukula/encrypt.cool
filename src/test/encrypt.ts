@@ -19,7 +19,7 @@ import {
 it(
   "encryptContent",
   async (): Promise<void> => {
-    const metaData = encryptContent("HINT", "MESSAGE", "PASSWORD", "192.168.0.1")
+    const metaData = encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1")
     chai.expect(metaData.hint).to.equal("HINT");
     chai.expect(metaData.version).to.equal(0);
     chai.expect(metaData.hash).to.equal("");
