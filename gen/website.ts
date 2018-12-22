@@ -21,7 +21,12 @@ export const utility: Module = Module.new({
 export const Content: Module = React({
   destination: "src/website/views/Content.tsx",
   name: "Content",
-  props: [],
+  props: [
+    Type.Required.new({
+      name: "environment",
+      type: "Environment",
+    }),
+  ],
   relayMutation: true,
 });
 
@@ -33,7 +38,12 @@ export const FourOhFour: Module = React({
 export const Page: Module = React({
   destination: "src/website/views/Page.tsx",
   name: "Page",
-  props: [],
+  props: [
+    Type.Required.new({
+      name: "environment",
+      type: "Environment",
+    }),
+  ],
 });
 
 export const Root: Module = React({
