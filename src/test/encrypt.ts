@@ -20,7 +20,7 @@ it(
   "encryptContent",
   async (): Promise<void> => {
     const metaData = encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
-    chai.expect(metaData.data).to.equal("d2323d29e3f460a525c9827d9fdc0fbc1eab896857c22a2f952277504be55a9e");
+    chai.expect(metaData.data).to.equal("fff8af0670ad227d52a24e1435d610a1186f2a15a43069c3398d9dfb40ee590c32ce65a21d81f77d6460cb9f673e4c314gRD8FwV6OybVQu9XyZ2gLOBFNAiwwzbqTF9/IrYmOpbcacFBzBrjHCt54cvSzz8q0SlyqroiZLrXujXPTvdkdMH8p4eX1NGweOH2+WMn0d0Eajo5jODSKL25/W+hVww");
     chai.expect(metaData.hash).to.equal("d2323d29e3f460a525c9827d9fdc0fbc1eab896857c22a2f952277504be55a9e");
     chai.expect(metaData.hint).to.equal("HINT");
     chai.expect(metaData.version).to.equal(0);
