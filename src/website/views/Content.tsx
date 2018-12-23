@@ -83,8 +83,8 @@ class _Content extends React.Component<IContentProps, IContentState> {
         <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
         <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
         <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
-        <Button onclick={() => this.generateQRCodeImage()}>Generate</Button>
-        <Image style={{width: 100, height: 100}} source={{uri: this.state.image}} />
+        <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
+        <img src={this.state.image} />
       </GridCell>
     </Grid>;
     /* BESPOKE END <<render>> */
@@ -95,6 +95,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
     const newState = {
       image: "",
     };
+    // @ts-ignore
     newState[field] = value;
     this.setState(newState);
   }
