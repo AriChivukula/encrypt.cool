@@ -31,6 +31,12 @@ import {
   Typography,
 } from "rmwc/Typography";
 import {
+  TextField,
+} from 'rmwc/textfield';
+import {
+  Button,
+} from 'rmwc/button';
+import {
   Environment,
 } from "relay-runtime";
 
@@ -57,6 +63,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
     super(props);
     this.state = {
       /* BESPOKE START <<state>> */
+      hint: "",
+      message: "",
+      password: "",
       /* BESPOKE END <<state>> */
     };
   }
@@ -64,25 +73,46 @@ class _Content extends React.Component<IContentProps, IContentState> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    return (
-      <Grid>
-        <GridCell span={12}>
-          <Typography use="headline2" tag="div">
-            Encrypt cool things
-          </Typography>
-        </GridCell>
-      </Grid>
-    );
+    return <Grid>
+      <GridCell span={12}>
+        <TextField label="Hint (unsecured)" onChange={(event) => this.onFieldChange("hint", e.target.value)} />
+        <TextField label="Message (secured)" onChange={(event) => this.onFieldChange("message", e.target.value)} />
+        <TextField label="Password (16 chars)" onChange={(event) => this.onFieldChange("password", e.target.value)} />
+        <Button onclick={() => this.generateQRCodeImage()}>Generate</Button>
+      </GridCell>
+    </Grid>;
     /* BESPOKE END <<render>> */
   }
 
   /* BESPOKE START <<implementation>> */
-  private generateQRCodeImage(
-    hint: string,
-    message: string,
-    password: string,
-  ): void {
-      // TODO
+  private onFieldChange(field: string, value: string) {
+    const newState = {};
+    newState[field] = value;
+    this.setState(newState);
+  }
+
+  private generateQRCodeImage(): void {
+    commitMutation(
+      this.props.environment,
+      {
+        mutation: graphql`
+          mutation ContentGenerateQRCodeImageMutation($input: GenerateQRCodeImageInput) {
+            generateQRCodeImage(input: $input) {
+              data
+            }
+          }
+        `,
+        onCompleted: (response: object, errors: Error[]): void => {
+        },
+        variables: {
+          input: {
+            hint: this.state.hint,
+            message: this.state.message,
+            password: this.state.password,
+          },
+        },
+      },
+    );
   }
   /* BESPOKE END <<implementation>> */
 }
