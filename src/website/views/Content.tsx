@@ -83,7 +83,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    if (window.location.search === "")
+    if (window.location.search === "") {
       return <Grid>
         <GridCell span={12}>
           <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
