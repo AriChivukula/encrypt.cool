@@ -46,6 +46,9 @@ import {
 import {
   ContentGenerateQRCodeImageMutationResponse,
 } from "./__generated__/ContentGenerateQRCodeImageMutation.graphql";
+import {
+  ContentDecodeQRCodeURLMutationResponse,
+} from "./__generated__/ContentDecodeQRCodeURLMutation.graphql";
 /* BESPOKE END <<imports>> */
 
 export interface IContentProps {
@@ -157,7 +160,8 @@ class _Content extends React.Component<IContentProps, IContentState> {
             }
           }
         `,
-        onCompleted: (response: object, errors: Error[]): void => {
+        onCompleted: (response: ContentDecodeQRCodeURLMutationResponse, errors: Error[]): void => {
+          this.setState({message: response.decodeQRCodeURL.message});
         },
         variables: {
           input: {
