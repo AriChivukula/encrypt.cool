@@ -32,10 +32,10 @@ import {
 } from "rmwc/Typography";
 import {
   TextField,
-} from 'rmwc/textfield';
+} from '@rmwc/textfield';
 import {
   Button,
-} from 'rmwc/button';
+} from '@rmwc/button';
 import {
   Environment,
 } from "relay-runtime";
@@ -80,9 +80,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
     /* BESPOKE START <<render>> */
     return <Grid>
       <GridCell span={12}>
-        <TextField label="Hint (unsecured)" onChange={(event) => this.onFieldChange("hint", e.target.value)} />
-        <TextField label="Message (secured)" onChange={(event) => this.onFieldChange("message", e.target.value)} />
-        <TextField label="Password (16 chars)" onChange={(event) => this.onFieldChange("password", e.target.value)} />
+        <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
+        <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
+        <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
         <Button onclick={() => this.generateQRCodeImage()}>Generate</Button>
         <Image style={{width: 100, height: 100}} source={{uri: this.state.image}} />
       </GridCell>
@@ -92,7 +92,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
 
   /* BESPOKE START <<implementation>> */
   private onFieldChange(field: string, value: string) {
-    const newState = {};
+    const newState = {
+      image: "",
+    };
     newState[field] = value;
     this.setState(newState);
   }
