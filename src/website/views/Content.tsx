@@ -72,6 +72,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
       message: "",
       password: "",
       image: "",
+      url: window.location.href,
       /* BESPOKE END <<state>> */
     };
   }
@@ -79,19 +80,32 @@ class _Content extends React.Component<IContentProps, IContentState> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    return <Grid>
-      <GridCell span={12}>
-        <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
-        <br />
-        <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
-        <br />
-        <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
-        <br />
-        <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
-        <br />
-        <img src={this.state.image} />
-      </GridCell>
-    </Grid>;
+    if (window.location.search === "")
+      return <Grid>
+        <GridCell span={12}>
+          <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
+          <br />
+          <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
+          <br />
+          <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
+          <br />
+          <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
+          <br />
+          <img src={this.state.image} />
+        </GridCell>
+      </Grid>;
+    } else {
+      const encodedMetadata = window.location.search.replace("?metadata=", "");
+      const stringMetadata = decodeURIComponent(encodedMetadata);
+      const metadata = JSON.parse(stringMetadata);
+      return <Grid>
+        <GridCell span={12}>
+          <TextField label={metadata.hint} onChange={(e: any) => this.setState({password: e.target.value})} />
+          <br />
+          {this.state.message}
+        </GridCell>
+      </Grid>;
+    }
     /* BESPOKE END <<render>> */
   }
 
