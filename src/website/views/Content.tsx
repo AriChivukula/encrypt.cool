@@ -2,8 +2,8 @@
  * This file is partially generated; only edit bespoke sections.
  *
  * SOURCE<<gen/website.ts::Content>>
- * BESPOKE<<imports, render, implementation>>
- * SIGNED<<EPKHcY/ruhFuvY0+EvoKqN1QLmmmZF4u4zM4FvhttKcFVCgjQmhKcIaAD+ZtFB3NTEE8TBaAS/pJDqALOQXFJg==>>
+ * BESPOKE<<imports, state, render, implementation>>
+ * SIGNED<<wHhga/f8WWA0n0LvoEPWacDgIkXwsiQa3HpbQS4EBpm/wH3Wm96bnKYkL1IiHONxHrK46l7WhFbt3eRMrBqyXg==>>
  */
 
 import * as React from "react";
@@ -11,9 +11,6 @@ import {
   commitMutation,
   graphql,
 } from "react-relay";
-import {
-  Environment,
-} from "relay-runtime";
 
 /* BESPOKE START <<imports>> */
 import {
@@ -33,34 +30,104 @@ import {
 import {
   Typography,
 } from "rmwc/Typography";
+import {
+  TextField,
+} from '@rmwc/textfield';
+import {
+  Button,
+} from '@rmwc/button';
+import {
+  Environment,
+} from "relay-runtime";
 
 import {
   goto,
 } from "../utility";
+import {
+  ContentGenerateQRCodeImageMutationResponse,
+} from "./__generated__/ContentGenerateQRCodeImageMutation.graphql";
 /* BESPOKE END <<imports>> */
 
 export interface IContentProps {
   environment: Environment;
 }
 
-class _Content extends React.Component<IContentProps> {
+export interface IContentState {
+  hint?: string;
+  message?: string;
+  password?: string;
+  image?: string;
+}
+
+class _Content extends React.Component<IContentProps, IContentState> {
+
+  public constructor(
+    props: IContentProps,
+  ) {
+    super(props);
+    this.state = {
+      /* BESPOKE START <<state>> */
+      hint: "",
+      message: "",
+      password: "",
+      image: "",
+      /* BESPOKE END <<state>> */
+    };
+  }
 
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    return (
-      <Grid>
-        <GridCell span={12}>
-          <Typography use="headline2" tag="div">
-            Encrypt cool things
-          </Typography>
-        </GridCell>
-      </Grid>
-    );
+    return <Grid>
+      <GridCell span={12}>
+        <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
+        <br />
+        <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
+        <br />
+        <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
+        <br />
+        <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
+        <br />
+        <img src={this.state.image} />
+      </GridCell>
+    </Grid>;
     /* BESPOKE END <<render>> */
   }
 
   /* BESPOKE START <<implementation>> */
+  private onFieldChange(field: string, value: string) {
+    const newState = {
+      image: "",
+    };
+    // @ts-ignore
+    newState[field] = value;
+    this.setState(newState);
+  }
+
+  private generateQRCodeImage(): void {
+    commitMutation(
+      this.props.environment,
+      {
+        mutation: graphql`
+          mutation ContentGenerateQRCodeImageMutation($input: GenerateQRCodeImageInput) {
+            generateQRCodeImage(input: $input) {
+              data
+            }
+          }
+        `,
+        onCompleted: (response: ContentGenerateQRCodeImageMutationResponse, errors: Error[]): void => {
+          this.setState({image: response.generateQRCodeImage.data});
+        },
+        variables: {
+          input: {
+            hint: this.state.hint,
+            message: this.state.message,
+            password: this.state.password,
+          },
+        },
+      },
+    );
+  }
   /* BESPOKE END <<implementation>> */
 }
 
