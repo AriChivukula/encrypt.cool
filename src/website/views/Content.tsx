@@ -2,8 +2,8 @@
  * This file is partially generated; only edit bespoke sections.
  *
  * SOURCE<<gen/website.ts::Content>>
- * BESPOKE<<imports, render, implementation>>
- * SIGNED<<EPKHcY/ruhFuvY0+EvoKqN1QLmmmZF4u4zM4FvhttKcFVCgjQmhKcIaAD+ZtFB3NTEE8TBaAS/pJDqALOQXFJg==>>
+ * BESPOKE<<imports, state, render, implementation>>
+ * SIGNED<<1lWZ10wS/j/STV53n5L0Uj6jfQRGvZZ198AklErYyuBVG17o1Kg3YqpOvTAnTI6ZH8fcInNczNEwtel2FsbrGw==>>
  */
 
 import * as React from "react";
@@ -43,7 +43,23 @@ export interface IContentProps {
   environment: Environment;
 }
 
-class _Content extends React.Component<IContentProps> {
+export interface IContentState {
+  hint?: string;
+  message?: string;
+  password?: string;
+}
+
+class _Content extends React.Component<IContentProps, IContentState> {
+
+  public constructor(
+    props: IContentProps,
+  ) {
+    super(props);
+    this.state = {
+      /* BESPOKE START <<state>> */
+      /* BESPOKE END <<state>> */
+    };
+  }
 
   public render(
   ): JSX.Element {
