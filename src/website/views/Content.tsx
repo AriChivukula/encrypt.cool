@@ -11,9 +11,6 @@ import {
   commitMutation,
   graphql,
 } from "react-relay";
-import {
-  Environment,
-} from "relay-runtime";
 
 /* BESPOKE START <<imports>> */
 import {
@@ -33,6 +30,9 @@ import {
 import {
   Typography,
 } from "rmwc/Typography";
+import {
+  Environment,
+} from "relay-runtime";
 
 import {
   goto,
