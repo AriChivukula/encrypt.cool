@@ -45,6 +45,10 @@ export const Content: Module = React({
       name: "image",
       type: "string",
     }),
+    Type.Optional.new({
+      name: "url",
+      type: "string",
+    }),
   ],
 });
 

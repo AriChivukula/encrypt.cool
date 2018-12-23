@@ -3,7 +3,7 @@
  *
  * SOURCE<<gen/website.ts::Content>>
  * BESPOKE<<imports, state, render, implementation>>
- * SIGNED<<wHhga/f8WWA0n0LvoEPWacDgIkXwsiQa3HpbQS4EBpm/wH3Wm96bnKYkL1IiHONxHrK46l7WhFbt3eRMrBqyXg==>>
+ * SIGNED<<LMNHinarMteTDziIN3fEI/7GIV7199EwszIOAO4HcFeEH0bC+3yCvQu+loP4aIq/OjEhqIUSUEaDF4fJ4tGqTA==>>
  */
 
 import * as React from "react";
@@ -46,6 +46,9 @@ import {
 import {
   ContentGenerateQRCodeImageMutationResponse,
 } from "./__generated__/ContentGenerateQRCodeImageMutation.graphql";
+import {
+  ContentDecodeQRCodeURLMutationResponse,
+} from "./__generated__/ContentDecodeQRCodeURLMutation.graphql";
 /* BESPOKE END <<imports>> */
 
 export interface IContentProps {
@@ -57,6 +60,7 @@ export interface IContentState {
   message?: string;
   password?: string;
   image?: string;
+  url?: string;
 }
 
 class _Content extends React.Component<IContentProps, IContentState> {
@@ -71,6 +75,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
       message: "",
       password: "",
       image: "",
+      url: window.location.href,
       /* BESPOKE END <<state>> */
     };
   }
@@ -78,19 +83,34 @@ class _Content extends React.Component<IContentProps, IContentState> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
-    return <Grid>
-      <GridCell span={12}>
-        <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
-        <br />
-        <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
-        <br />
-        <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
-        <br />
-        <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
-        <br />
-        <img src={this.state.image} />
-      </GridCell>
-    </Grid>;
+    if (window.location.search === "") {
+      return <Grid>
+        <GridCell span={12}>
+          <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
+          <br />
+          <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
+          <br />
+          <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
+          <br />
+          <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
+          <br />
+          <img src={this.state.image} />
+        </GridCell>
+      </Grid>;
+    } else {
+      const encodedMetadata = window.location.search.replace("?metadata=", "");
+      const stringMetadata = decodeURIComponent(encodedMetadata);
+      const metadata = JSON.parse(stringMetadata);
+      return <Grid>
+        <GridCell span={12}>
+          <TextField label={metadata.hint} onChange={(e: any) => this.setState({message: "", password: e.target.value})} />
+          <br />
+          <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
+          <br />
+          {this.state.message}
+        </GridCell>
+      </Grid>;
+    }
     /* BESPOKE END <<render>> */
   }
 
@@ -122,6 +142,30 @@ class _Content extends React.Component<IContentProps, IContentState> {
           input: {
             hint: this.state.hint,
             message: this.state.message,
+            password: this.state.password,
+          },
+        },
+      },
+    );
+  }
+
+  private decodeQRCodeURL(): void {
+    commitMutation(
+      this.props.environment,
+      {
+        mutation: graphql`
+          mutation ContentDecodeQRCodeURLMutation($input: DecodeQRCodeURLInput) {
+            decodeQRCodeURL(input: $input) {
+              message
+            }
+          }
+        `,
+        onCompleted: (response: ContentDecodeQRCodeURLMutationResponse, errors: Error[]): void => {
+          this.setState({message: response.decodeQRCodeURL.message});
+        },
+        variables: {
+          input: {
+            url: this.state.url,
             password: this.state.password,
           },
         },
