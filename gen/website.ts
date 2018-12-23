@@ -28,6 +28,20 @@ export const Content: Module = React({
     }),
   ],
   relayMutation: true,
+  state: [
+    Type.Optional.new({
+      name: "hint",
+      type: "string",
+    }),
+    Type.Optional.new({
+      name: "message",
+      type: "string",
+    }),
+    Type.Optional.new({
+      name: "password",
+      type: "string",
+    }),
+  ],
 });
 
 export const FourOhFour: Module = React({
