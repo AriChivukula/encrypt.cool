@@ -100,7 +100,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
       const metadata = JSON.parse(stringMetadata);
       return <Grid>
         <GridCell span={12}>
-          <TextField label={metadata.hint} onChange={(e: any) => this.setState({password: e.target.value})} />
+          <TextField label={metadata.hint} onChange={(e: any) => this.setState({message: "", password: e.target.value})} />
+          <br />
+          <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
           <br />
           {this.state.message}
         </GridCell>
@@ -137,6 +139,29 @@ class _Content extends React.Component<IContentProps, IContentState> {
           input: {
             hint: this.state.hint,
             message: this.state.message,
+            password: this.state.password,
+          },
+        },
+      },
+    );
+  }
+
+  private decodeQRCodeURL(): void {
+    commitMutation(
+      this.props.environment,
+      {
+        mutation: graphql`
+          mutation ContentDecodeQRCodeURLMutation($input: DecodeQRCodeURLInput) {
+            decodeQRCodeURL(input: $input) {
+              message
+            }
+          }
+        `,
+        onCompleted: (response: object, errors: Error[]): void => {
+        },
+        variables: {
+          input: {
+            url: this.state.url,
             password: this.state.password,
           },
         },
