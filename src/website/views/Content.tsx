@@ -81,9 +81,13 @@ class _Content extends React.Component<IContentProps, IContentState> {
     return <Grid>
       <GridCell span={12}>
         <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
+        <br />
         <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
+        <br />
         <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
+        <br />
         <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
+        <br />
         <img src={this.state.image} />
       </GridCell>
     </Grid>;
