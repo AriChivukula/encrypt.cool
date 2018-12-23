@@ -41,6 +41,10 @@ export const Content: Module = React({
       name: "password",
       type: "string",
     }),
+    Type.Optional.new({
+      name: "image",
+      type: "string",
+    }),
   ],
 });
 
