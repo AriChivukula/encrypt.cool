@@ -43,6 +43,9 @@ import {
 import {
   goto,
 } from "../utility";
+import {
+  ContentGenerateQRCodeImageMutationResponse,
+} from "./__generated__/ContentGenerateQRCodeImageMutation.graphql";
 /* BESPOKE END <<imports>> */
 
 export interface IContentProps {
@@ -67,6 +70,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
       hint: "",
       message: "",
       password: "",
+      image: "",
       /* BESPOKE END <<state>> */
     };
   }
@@ -103,7 +107,8 @@ class _Content extends React.Component<IContentProps, IContentState> {
             }
           }
         `,
-        onCompleted: (response: object, errors: Error[]): void => {
+        onCompleted: (response: ContentGenerateQRCodeImageMutationResponse, errors: Error[]): void => {
+          this.setState({image: response.generateQRCodeImage.data});
         },
         variables: {
           input: {
