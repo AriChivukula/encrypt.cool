@@ -84,6 +84,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
         <TextField label="Message (secured)" onChange={(event) => this.onFieldChange("message", e.target.value)} />
         <TextField label="Password (16 chars)" onChange={(event) => this.onFieldChange("password", e.target.value)} />
         <Button onclick={() => this.generateQRCodeImage()}>Generate</Button>
+        <Image style={{width: 100, height: 100}} source={{uri: this.state.image}} />
       </GridCell>
     </Grid>;
     /* BESPOKE END <<render>> */
