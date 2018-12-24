@@ -139,7 +139,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
         onCompleted: (response: ContentGenerateQRCodeImageMutationResponse, errors: Error[]): void => {
           this.setState({
             image: response.generateQRCodeImage.data,
-            error: errors.map((e: Error) => e.message).join(", "),
+            error: (errors || []).map((e: Error) => e.message).join(", "),
           });
         },
         variables: {
@@ -167,7 +167,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
         onCompleted: (response: ContentDecodeQRCodeURLMutationResponse, errors: Error[]): void => {
           this.setState({
             message: response.decodeQRCodeURL.message,
-            error: errors.map((e: Error) => e.message).join(", "),
+            error: (errors || []).map((e: Error) => e.message).join(", "),
           });
         },
         variables: {
