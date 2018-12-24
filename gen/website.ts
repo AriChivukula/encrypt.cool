@@ -49,6 +49,10 @@ export const Content: Module = React({
       name: "url",
       type: "string",
     }),
+    Type.Optional.new({
+      name: "error",
+      type: "string",
+    }),
   ],
 });
 
