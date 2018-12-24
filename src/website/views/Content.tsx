@@ -3,7 +3,7 @@
  *
  * SOURCE<<gen/website.ts::Content>>
  * BESPOKE<<imports, state, render, implementation>>
- * SIGNED<<RTu5bQ3dtFX/RwzQ78h0F/5iY864LU7GWxNK7dPZLnDJuzDT4UejJrti+tazGgOOhTqmH6HUiIfu9H3DwApXBw==>>
+ * SIGNED<<seSd0V7tlRsuDlrJjvcCOGedLoLzSaj4uGe/hnj4z4+pcMqnBbLm1zw/OnzYDwXCQTxnzyanQaEC1mDBPYFAnQ==>>
  */
 
 import * as React from "react";
@@ -65,6 +65,7 @@ export interface IContentState {
   image?: string;
   url?: string;
   error?: string;
+  loading?: boolean;
 }
 
 class _Content extends React.Component<IContentProps, IContentState> {
