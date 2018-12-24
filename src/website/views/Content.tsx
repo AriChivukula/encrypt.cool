@@ -94,7 +94,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
           <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({image: "", message: e.target.value})} />
           <br />
           <br />
-          <TextField fullwidth label="Password" onChange={(e: any) => this.setState({image: "", password: e.target.value})} pattern=".{16,}" />
+          <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({image: "", password: e.target.value})} />
           <br />
           <br />
           <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
@@ -136,12 +136,18 @@ class _Content extends React.Component<IContentProps, IContentState> {
             }
           }
         `,
-        onCompleted: (response: ContentGenerateQRCodeImageMutationResponse, errors: Error[]): void => {
+        onCompleted: (response: ContentGenerateQRCodeImageMutationResponse): void => {
           this.setState({
             image: response.generateQRCodeImage.data,
-            error: (errors || []).map((e: Error) => e.message).join(", "),
+            error: "",
           });
         },
+        onError: (error: Error): void => {
+          this.setState({
+            image: "",
+            error: error.message,
+          });
+        }
         variables: {
           input: {
             hint: this.state.hint,
@@ -164,12 +170,18 @@ class _Content extends React.Component<IContentProps, IContentState> {
             }
           }
         `,
-        onCompleted: (response: ContentDecodeQRCodeURLMutationResponse, errors: Error[]): void => {
+        onCompleted: (response: ContentDecodeQRCodeURLMutationResponse): void => {
           this.setState({
             message: response.decodeQRCodeURL.message,
-            error: (errors || []).map((e: Error) => e.message).join(", "),
+            error: "",
           });
         },
+        onError: (error: Error): void => {
+          this.setState({
+            message: "",
+            error: error.message,
+          });
+        }
         variables: {
           input: {
             url: this.state.url,
