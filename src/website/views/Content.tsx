@@ -82,6 +82,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
       image: "",
       url: window.location.href,
       error: "",
+      loading: false,
       /* BESPOKE END <<state>> */
     };
   }
@@ -89,21 +90,26 @@ class _Content extends React.Component<IContentProps, IContentState> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
+    var progress = <span />;
+    if (this.state.loading) {
+      progress = <LinearProgress determinate={false}/>;
+    }
     if (window.location.search === "") {
       return <Grid>
         <GridCell span={12}>
-          <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({error: "", image: "", hint: e.target.value})} />
+          <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", hint: e.target.value})} />
           <br />
           <br />
-          <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({error: "", image: "", message: e.target.value})} />
+          <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", message: e.target.value})} />
           <br />
           <br />
-          <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({error: "", image: "", password: e.target.value})} />
+          <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", password: e.target.value})} />
           <br />
           <br />
           <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
           <br />
           <br />
+          {progress}
           <img src={this.state.image} />
           <Typography use="overline">{this.state.error}</Typography>
         </GridCell>
@@ -114,12 +120,13 @@ class _Content extends React.Component<IContentProps, IContentState> {
       const metadata = JSON.parse(stringMetadata);
       return <Grid>
         <GridCell span={12}>
-          <TextField fullwidth label={metadata.hint} onChange={(e: any) => this.setState({error: "", message: "", password: e.target.value})} />
+          <TextField fullwidth label={metadata.hint} onChange={(e: any) => this.setState({loading: false, error: "", message: "", password: e.target.value})} />
           <br />
           <br />
           <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
           <br />
           <br />
+          {progress}
           <Typography use="body1">{this.state.message}</Typography>
           <Typography use="overline">{this.state.error}</Typography>
         </GridCell>
@@ -130,6 +137,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
 
   /* BESPOKE START <<implementation>> */
   private generateQRCodeImage(): void {
+    this.setState({
+      loading: true,
+    });
     commitMutation(
       this.props.environment,
       {
@@ -144,12 +154,14 @@ class _Content extends React.Component<IContentProps, IContentState> {
           this.setState({
             image: response.generateQRCodeImage.data,
             error: "",
+            loading: false,
           });
         },
         onError: (e: Error): void => {
           this.setState({
             image: "",
             error: e.message,
+            loading: false,
           });
         },
         variables: {
@@ -164,6 +176,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
   }
 
   private decodeQRCodeURL(): void {
+    this.setState({
+      loading: true,
+    });
     commitMutation(
       this.props.environment,
       {
@@ -178,12 +193,14 @@ class _Content extends React.Component<IContentProps, IContentState> {
           this.setState({
             message: response.decodeQRCodeURL.message,
             error: "",
+            loading: false,
           });
         },
         onError: (e: Error): void => {
           this.setState({
             message: "",
             error: e.message,
+            loading: false,
           });
         },
         variables: {
