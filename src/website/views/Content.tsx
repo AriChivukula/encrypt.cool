@@ -77,6 +77,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
       password: "",
       image: "",
       url: window.location.href,
+      error: "",
       /* BESPOKE END <<state>> */
     };
   }
@@ -87,19 +88,20 @@ class _Content extends React.Component<IContentProps, IContentState> {
     if (window.location.search === "") {
       return <Grid>
         <GridCell span={12}>
-          <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
+          <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({image: "", hint: e.target.value})} />
           <br />
           <br />
-          <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
+          <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({image: "", message: e.target.value})} />
           <br />
           <br />
-          <TextField fullwidth label="Password" onChange={(e: any) => this.onFieldChange("password", e.target.value)} pattern=".{16,}" />
+          <TextField fullwidth label="Password" onChange={(e: any) => this.setState({image: "", password: e.target.value})} pattern=".{16,}" />
           <br />
           <br />
           <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
           <br />
           <br />
           <img src={this.state.image} />
+          <Typography use="overline">{this.state.error}</Typography>
         </GridCell>
       </Grid>;
     } else {
@@ -114,7 +116,8 @@ class _Content extends React.Component<IContentProps, IContentState> {
           <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
           <br />
           <br />
-          {this.state.message}
+          <Typography use="body1">{this.state.message}</Typography>
+          <Typography use="overline">{this.state.error}</Typography>
         </GridCell>
       </Grid>;
     }
@@ -122,15 +125,6 @@ class _Content extends React.Component<IContentProps, IContentState> {
   }
 
   /* BESPOKE START <<implementation>> */
-  private onFieldChange(field: string, value: string) {
-    const newState = {
-      image: "",
-    };
-    // @ts-ignore
-    newState[field] = value;
-    this.setState(newState);
-  }
-
   private generateQRCodeImage(): void {
     commitMutation(
       this.props.environment,
