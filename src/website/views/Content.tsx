@@ -142,12 +142,12 @@ class _Content extends React.Component<IContentProps, IContentState> {
             error: "",
           });
         },
-        onError: (error: Error): void => {
+        onError: (e: Error): void => {
           this.setState({
             image: "",
-            error: error.message,
+            error: e.message,
           });
-        }
+        },
         variables: {
           input: {
             hint: this.state.hint,
@@ -176,12 +176,12 @@ class _Content extends React.Component<IContentProps, IContentState> {
             error: "",
           });
         },
-        onError: (error: Error): void => {
+        onError: (e: Error): void => {
           this.setState({
             message: "",
-            error: error.message,
+            error: e.message,
           });
-        }
+        },
         variables: {
           input: {
             url: this.state.url,
