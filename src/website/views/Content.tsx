@@ -3,7 +3,7 @@
  *
  * SOURCE<<gen/website.ts::Content>>
  * BESPOKE<<imports, state, render, implementation>>
- * SIGNED<<LMNHinarMteTDziIN3fEI/7GIV7199EwszIOAO4HcFeEH0bC+3yCvQu+loP4aIq/OjEhqIUSUEaDF4fJ4tGqTA==>>
+ * SIGNED<<seSd0V7tlRsuDlrJjvcCOGedLoLzSaj4uGe/hnj4z4+pcMqnBbLm1zw/OnzYDwXCQTxnzyanQaEC1mDBPYFAnQ==>>
  */
 
 import * as React from "react";
@@ -18,24 +18,27 @@ import {
   CardMedia,
   CardMediaContent,
   CardPrimaryAction,
-} from "rmwc/Card";
+} from "@rmwc/card";
 import {
   Grid,
   GridCell,
-} from "rmwc/Grid";
+} from "@rmwc/grid";
 import {
   List,
   SimpleListItem,
-} from "rmwc/List";
+} from "@rmwc/list";
 import {
   Typography,
-} from "rmwc/Typography";
+} from "@rmwc/typography";
 import {
   TextField,
 } from '@rmwc/textfield';
 import {
   Button,
 } from '@rmwc/button';
+import {
+  LinearProgress,
+} from '@rmwc/linear-progress';
 import {
   Environment,
 } from "relay-runtime";
@@ -61,6 +64,8 @@ export interface IContentState {
   password?: string;
   image?: string;
   url?: string;
+  error?: string;
+  loading?: boolean;
 }
 
 class _Content extends React.Component<IContentProps, IContentState> {
@@ -76,6 +81,8 @@ class _Content extends React.Component<IContentProps, IContentState> {
       password: "",
       image: "",
       url: window.location.href,
+      error: "",
+      loading: false,
       /* BESPOKE END <<state>> */
     };
   }
@@ -83,18 +90,28 @@ class _Content extends React.Component<IContentProps, IContentState> {
   public render(
   ): JSX.Element {
     /* BESPOKE START <<render>> */
+    var progress = <span />;
+    if (this.state.loading) {
+      progress = <LinearProgress determinate={false}/>;
+    }
     if (window.location.search === "") {
       return <Grid>
         <GridCell span={12}>
-          <TextField label="Hint (unsecured)" onChange={(e: any) => this.onFieldChange("hint", e.target.value)} />
+          <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", hint: e.target.value})} />
           <br />
-          <TextField label="Message (secured)" onChange={(e: any) => this.onFieldChange("message", e.target.value)} />
           <br />
-          <TextField label="Password (16 chars)" onChange={(e: any) => this.onFieldChange("password", e.target.value)} />
+          <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", message: e.target.value})} />
+          <br />
+          <br />
+          <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", password: e.target.value})} />
+          <br />
           <br />
           <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
           <br />
+          <br />
+          {progress}
           <img src={this.state.image} />
+          <Typography use="overline">{this.state.error}</Typography>
         </GridCell>
       </Grid>;
     } else {
@@ -103,11 +120,15 @@ class _Content extends React.Component<IContentProps, IContentState> {
       const metadata = JSON.parse(stringMetadata);
       return <Grid>
         <GridCell span={12}>
-          <TextField label={metadata.hint} onChange={(e: any) => this.setState({message: "", password: e.target.value})} />
+          <TextField fullwidth label={metadata.hint} onChange={(e: any) => this.setState({loading: false, error: "", message: "", password: e.target.value})} />
+          <br />
           <br />
           <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
           <br />
-          {this.state.message}
+          <br />
+          {progress}
+          <Typography use="body1">{this.state.message}</Typography>
+          <Typography use="overline">{this.state.error}</Typography>
         </GridCell>
       </Grid>;
     }
@@ -115,16 +136,10 @@ class _Content extends React.Component<IContentProps, IContentState> {
   }
 
   /* BESPOKE START <<implementation>> */
-  private onFieldChange(field: string, value: string) {
-    const newState = {
-      image: "",
-    };
-    // @ts-ignore
-    newState[field] = value;
-    this.setState(newState);
-  }
-
   private generateQRCodeImage(): void {
+    this.setState({
+      loading: true,
+    });
     commitMutation(
       this.props.environment,
       {
@@ -135,8 +150,19 @@ class _Content extends React.Component<IContentProps, IContentState> {
             }
           }
         `,
-        onCompleted: (response: ContentGenerateQRCodeImageMutationResponse, errors: Error[]): void => {
-          this.setState({image: response.generateQRCodeImage.data});
+        onCompleted: (response: ContentGenerateQRCodeImageMutationResponse): void => {
+          this.setState({
+            image: response.generateQRCodeImage.data,
+            error: "",
+            loading: false,
+          });
+        },
+        onError: (e: Error): void => {
+          this.setState({
+            image: "",
+            error: e.message,
+            loading: false,
+          });
         },
         variables: {
           input: {
@@ -150,6 +176,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
   }
 
   private decodeQRCodeURL(): void {
+    this.setState({
+      loading: true,
+    });
     commitMutation(
       this.props.environment,
       {
@@ -160,8 +189,19 @@ class _Content extends React.Component<IContentProps, IContentState> {
             }
           }
         `,
-        onCompleted: (response: ContentDecodeQRCodeURLMutationResponse, errors: Error[]): void => {
-          this.setState({message: response.decodeQRCodeURL.message});
+        onCompleted: (response: ContentDecodeQRCodeURLMutationResponse): void => {
+          this.setState({
+            message: response.decodeQRCodeURL.message,
+            error: "",
+            loading: false,
+          });
+        },
+        onError: (e: Error): void => {
+          this.setState({
+            message: "",
+            error: e.message,
+            loading: false,
+          });
         },
         variables: {
           input: {
