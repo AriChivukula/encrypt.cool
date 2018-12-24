@@ -3,7 +3,7 @@
  *
  * SOURCE<<gen/website.ts::Content>>
  * BESPOKE<<imports, state, render, implementation>>
- * SIGNED<<LMNHinarMteTDziIN3fEI/7GIV7199EwszIOAO4HcFeEH0bC+3yCvQu+loP4aIq/OjEhqIUSUEaDF4fJ4tGqTA==>>
+ * SIGNED<<RTu5bQ3dtFX/RwzQ78h0F/5iY864LU7GWxNK7dPZLnDJuzDT4UejJrti+tazGgOOhTqmH6HUiIfu9H3DwApXBw==>>
  */
 
 import * as React from "react";
@@ -61,6 +61,7 @@ export interface IContentState {
   password?: string;
   image?: string;
   url?: string;
+  error?: string;
 }
 
 class _Content extends React.Component<IContentProps, IContentState> {
