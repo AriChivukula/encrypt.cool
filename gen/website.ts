@@ -53,6 +53,10 @@ export const Content: Module = React({
       name: "error",
       type: "string",
     }),
+    Type.Optional.new({
+      name: "loading",
+      type: "boolean",
+    }),
   ],
 });
 
