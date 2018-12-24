@@ -88,13 +88,13 @@ class _Content extends React.Component<IContentProps, IContentState> {
     if (window.location.search === "") {
       return <Grid>
         <GridCell span={12}>
-          <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({image: "", hint: e.target.value})} />
+          <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({error: "", image: "", hint: e.target.value})} />
           <br />
           <br />
-          <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({image: "", message: e.target.value})} />
+          <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({error: "", image: "", message: e.target.value})} />
           <br />
           <br />
-          <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({image: "", password: e.target.value})} />
+          <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({error: "", image: "", password: e.target.value})} />
           <br />
           <br />
           <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
@@ -110,7 +110,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
       const metadata = JSON.parse(stringMetadata);
       return <Grid>
         <GridCell span={12}>
-          <TextField fullwidth label={metadata.hint} onChange={(e: any) => this.setState({message: "", password: e.target.value})} />
+          <TextField fullwidth label={metadata.hint} onChange={(e: any) => this.setState({error: "", message: "", password: e.target.value})} />
           <br />
           <br />
           <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
