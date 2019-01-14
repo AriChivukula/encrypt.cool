@@ -11,6 +11,9 @@
 import {
   toDataURL,
 } from "qrcode";
+import {
+  sharp,
+} from "sharp";
 
 import {
   decryptContent,
