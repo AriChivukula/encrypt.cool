@@ -12,7 +12,7 @@ import {
   toDataURL,
 } from "qrcode";
 import {
-  sharp,
+  Sharp,
 } from "sharp";
 
 import {
