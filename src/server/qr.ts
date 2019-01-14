@@ -24,7 +24,36 @@ export const URI_PREFIX = "https://encrypt.cool/?metadata=";
 export async function encodeQR(hint: string, message: string, password: string, ip: string): Promise<string> {
   const metaData = await encryptContent(hint, message, password, ip);
   const url = URI_PREFIX + encodeURIComponent(JSON.stringify(metaData));
-  return await toDataURL(url);
+  let data_img = await toDataURL(url);
+  let white_img = await sharp({
+    create: {
+      width: 360,
+      height: 360,
+      channels: 3,
+      background: {
+        r: 255,
+        g: 255,
+        b: 255,
+      },
+    },
+  })
+    .png()
+    .toBuffer();
+  let color_img = await sharp({
+    create: {
+      width: 350,
+      height: 350,
+      channels: 3,
+      background: {
+        r: data_img.charCodeAt(0) % 256,
+        g: data_img.charCodeAt(1) % 256,
+        b: data_img.charCodeAt(2) % 256,
+      },
+    },
+  })
+    .png()
+    .toBuffer();
+  return data_img;
 }
 
 export function decodeQR(url: string, password: string): ECData {
