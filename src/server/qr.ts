@@ -7,9 +7,8 @@
  */
 
 /* BESPOKE START <<custom>> */
-
 import {
-  toFileStream,
+  toDataURL,
 } from "qrcode";
 import sharp from "sharp";
 
@@ -20,11 +19,13 @@ import {
 } from "./encrypt";
 
 export const URI_PREFIX = "https://encrypt.cool/?metadata=";
+export const IMG_PREFIX = "data:image/png;base64,";
 
 export async function encodeQR(hint: string, message: string, password: string, ip: string): Promise<string> {
   const metaData = await encryptContent(hint, message, password, ip);
   const url = URI_PREFIX + encodeURIComponent(JSON.stringify(metaData));
-  let data_img = await toFileStream(url);
+  let data_url = await toDataURL(url);
+  let data_img = data_url.replace(IMG_PREFIX, "");
   let color_img = await sharp({
     create: {
       width: 370,
@@ -59,7 +60,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
       },
     )
     .overlayWith(
-      data_img,
+      Buffer.from(data_img, "base64"),
       {
         top: 30,
         left: 30,
@@ -67,7 +68,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
     )
     .png()
     .toBuffer();
-  return "data:image/png;base64," + final_img.toString('base64');
+  return IMG_PREFIX + final_img.toString('base64');
 }
 
 export function decodeQR(url: string, password: string): ECData {
