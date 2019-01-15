@@ -64,7 +64,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
     )
     .png()
     .toBuffer();
-  let final_image = await sharp(final_image)
+  final_image = await sharp(final_image)
     .overlayWith(
       Buffer.from(data_img, "base64"),
       {
@@ -74,7 +74,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
     )
     .png()
     .toBuffer();
-  return IMG_PREFIX + final_img.toString('base64');
+  return IMG_PREFIX + final_image.toString('base64');
 }
 
 export function decodeQR(url: string, password: string): ECData {
