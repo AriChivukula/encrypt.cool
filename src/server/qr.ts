@@ -26,10 +26,24 @@ export async function encodeQR(hint: string, message: string, password: string, 
   const url = URI_PREFIX + encodeURIComponent(JSON.stringify(metaData));
   let data_url = await toDataURL(url);
   let data_img = data_url.replace(IMG_PREFIX, "");
-  let color_img = await sharp({
+  let white_img = await sharp({
     create: {
       width: 370,
       height: 370,
+      channels: 3,
+      background: {
+        r: 255,
+        g: 255,
+        b: 255,
+      },
+    },
+  })
+    .png()
+    .toBuffer();
+  let color_img = await sharp({
+    create: {
+      width: 400,
+      height: 400,
       channels: 3,
       background: {
         r: data_img.charCodeAt(0) % 256,
@@ -40,25 +54,17 @@ export async function encodeQR(hint: string, message: string, password: string, 
   })
     .png()
     .toBuffer();
-  let final_img = await sharp({
-    create: {
-      width: 400,
-      height: 400,
-      channels: 3,
-      background: {
-        r: 255,
-        g: 255,
-        b: 255,
-      },
-    },
-  })
+  let final_image = await sharp(color_img)
     .overlayWith(
-      color_img,
+      white_img,
       {
         top: 15,
         left: 15,
       },
     )
+    .png()
+    .toBuffer();
+  let final_image = await sharp(final_image)
     .overlayWith(
       Buffer.from(data_img, "base64"),
       {
