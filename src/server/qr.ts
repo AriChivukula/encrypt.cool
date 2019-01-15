@@ -25,7 +25,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
   const metaData = await encryptContent(hint, message, password, ip);
   const url = URI_PREFIX + encodeURIComponent(JSON.stringify(metaData));
   let data_url = await toDataURL(url);
-  let data_img = data_url.replace(IMG_PREFIX, "");
+  let data_img = Buffer.from(data_url.replace(IMG_PREFIX, ""), "base64");
   let white_img = await sharp({
     create: {
       width: 370,
@@ -46,15 +46,15 @@ export async function encodeQR(hint: string, message: string, password: string, 
       height: 400,
       channels: 3,
       background: {
-        r: data_img.charCodeAt(0) % 256,
-        g: data_img.charCodeAt(1) % 256,
-        b: data_img.charCodeAt(2) % 256,
+        r: metaData.hash.charCodeAt(0) % 256,
+        g: metaData.hash.charCodeAt(1) % 256,
+        b: metaData.hash.charCodeAt(2) % 256,
       },
     },
   })
     .png()
     .toBuffer();
-  let final_image = await sharp(color_img)
+  let final_img = await sharp(color_img)
     .overlayWith(
       white_img,
       {
@@ -64,9 +64,9 @@ export async function encodeQR(hint: string, message: string, password: string, 
     )
     .png()
     .toBuffer();
-  final_image = await sharp(final_image)
+  final_img = await sharp(final_img)
     .overlayWith(
-      Buffer.from(data_img, "base64"),
+      data_img,
       {
         top: 30,
         left: 30,
@@ -74,7 +74,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
     )
     .png()
     .toBuffer();
-  return IMG_PREFIX + final_image.toString('base64');
+  return IMG_PREFIX + final_img.toString('base64');
 }
 
 export function decodeQR(url: string, password: string): ECData {
