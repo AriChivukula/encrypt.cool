@@ -9,9 +9,6 @@
     "github": "@arichiv"
   },
   "private": true,
-  "engines": {
-    "node": "<9.0.0"
-  },
   "dependencies": {
     "@babel/polyfill": "7.2.5",
     "aws-serverless-express": "3.3.5",
