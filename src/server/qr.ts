@@ -59,7 +59,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
       },
     )
     .overlayWith(
-      Buffer.from(data_img, 'utf-8');,
+      Buffer.from(data_img, 'utf-8'),
       {
         top: 30,
         left: 30,
