@@ -38,7 +38,6 @@ gulp.task(
   () => gulp.src("src/**/*.html")
     .pipe(replace("ENV_TITLE", pkg.title))
     .pipe(replace("ENV_VERSION", pkg.version))
-    .pipe(replace("ENV_NAME", pkg.name))
     .pipe(gulp.dest("build/2")),
 );
 
