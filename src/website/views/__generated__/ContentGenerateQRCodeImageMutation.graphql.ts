@@ -69,24 +69,26 @@ v1 = [
 ];
 return {
   "kind": "Request",
-  "operationKind": "mutation",
-  "name": "ContentGenerateQRCodeImageMutation",
-  "id": null,
-  "text": "mutation ContentGenerateQRCodeImageMutation(\n  $input: GenerateQRCodeImageInput\n) {\n  generateQRCodeImage(input: $input) {\n    data\n  }\n}\n",
-  "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "ContentGenerateQRCodeImageMutation",
     "type": "Mutation",
     "metadata": null,
-    "argumentDefinitions": v0,
-    "selections": v1
+    "argumentDefinitions": (v0/*: any*/),
+    "selections": (v1/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "ContentGenerateQRCodeImageMutation",
-    "argumentDefinitions": v0,
-    "selections": v1
+    "argumentDefinitions": (v0/*: any*/),
+    "selections": (v1/*: any*/)
+  },
+  "params": {
+    "operationKind": "mutation",
+    "name": "ContentGenerateQRCodeImageMutation",
+    "id": null,
+    "text": "mutation ContentGenerateQRCodeImageMutation(\n  $input: GenerateQRCodeImageInput\n) {\n  generateQRCodeImage(input: $input) {\n    data\n  }\n}\n",
+    "metadata": {}
   }
 };
 })();

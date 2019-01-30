@@ -14,7 +14,7 @@ import * as cookie from "js-cookie";
 import {
   SimpleTopAppBar,
   TopAppBarFixedAdjust,
-} from "rmwc/TopAppBar";
+} from "@rmwc/top-app-bar";
 import {
   Url,
 } from "url";

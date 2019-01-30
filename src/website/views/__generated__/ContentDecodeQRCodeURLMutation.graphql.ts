@@ -68,24 +68,26 @@ v1 = [
 ];
 return {
   "kind": "Request",
-  "operationKind": "mutation",
-  "name": "ContentDecodeQRCodeURLMutation",
-  "id": null,
-  "text": "mutation ContentDecodeQRCodeURLMutation(\n  $input: DecodeQRCodeURLInput\n) {\n  decodeQRCodeURL(input: $input) {\n    message\n  }\n}\n",
-  "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "ContentDecodeQRCodeURLMutation",
     "type": "Mutation",
     "metadata": null,
-    "argumentDefinitions": v0,
-    "selections": v1
+    "argumentDefinitions": (v0/*: any*/),
+    "selections": (v1/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "ContentDecodeQRCodeURLMutation",
-    "argumentDefinitions": v0,
-    "selections": v1
+    "argumentDefinitions": (v0/*: any*/),
+    "selections": (v1/*: any*/)
+  },
+  "params": {
+    "operationKind": "mutation",
+    "name": "ContentDecodeQRCodeURLMutation",
+    "id": null,
+    "text": "mutation ContentDecodeQRCodeURLMutation(\n  $input: DecodeQRCodeURLInput\n) {\n  decodeQRCodeURL(input: $input) {\n    message\n  }\n}\n",
+    "metadata": {}
   }
 };
 })();
