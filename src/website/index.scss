@@ -3,7 +3,12 @@ $mdc-theme-primary: #fcb8ab;
 $mdc-theme-secondary: #feeae6;
 $mdc-theme-on-primary: #442b2d;
 $mdc-theme-on-secondary: #442b2d;
-@import "material-components-web/material-components-web";
+
+@import "@material/react-layout-grid/index.scss";
+@import "@material/react-linear-progress/index.scss";
+@import "@material/react-material-icon/index.scss";
+@import "@material/react-top-app-bar/index.scss";
+@import "@material/react-typography/index.scss";
 
 html, body {
   margin: 0px;
