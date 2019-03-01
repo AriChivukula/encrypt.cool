@@ -84,13 +84,35 @@ class _Content extends React.Component<IContentProps, IContentState> {
       return <Grid>
         <Row>
           <Cell columns={12}>
-            <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", hint: e.target.value})} />
+            <TextField
+              fullwidth
+              helperText={<HelperText>Hint (unsecured)</HelperText>}
+            >
+              <Input
+               onChange={(e: any) => this.setState({loading: false, error: "", image: "", hint: e.target.value})}
+              />
+            </TextField>
             <br />
             <br />
-            <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", message: e.target.value})} />
+            <TextField
+              textarea
+              fullwidth
+              helperText={<HelperText>Message (secured)</HelperText>}
+            >
+              <Input
+               onChange={(e: any) => this.setState({loading: false, error: "", image: "", message: e.target.value})}
+              />
+            </TextField>
             <br />
             <br />
-            <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", password: e.target.value})} />
+            <TextField
+              fullwidth
+              helperText={<HelperText>Password (16 character minimum)</HelperText>}
+            >
+              <Input
+               onChange={(e: any) => this.setState({loading: false, error: "", image: "", password: e.target.value})}
+              />
+            </TextField>
             <br />
             <br />
             <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
@@ -98,7 +120,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
             <br />
             {progress}
             <img src={this.state.image} />
-            <Typography use="overline">{this.state.error}</Typography>
+            <Overline>{this.state.error}</Overline>
           </Cell>
         </Row>
       </Grid>;
@@ -109,15 +131,22 @@ class _Content extends React.Component<IContentProps, IContentState> {
       return <Grid>
         <Row>
           <Cell columns={12}>
-            <TextField fullwidth label={metadata.hint} onChange={(e: any) => this.setState({loading: false, error: "", message: "", password: e.target.value})} />
+            <TextField
+              fullwidth
+              helperText={<HelperText>{metadata.hint}</HelperText>}
+            >
+              <Input
+               onChange={(e: any) => this.setState({loading: false, error: "", message: "", password: e.target.value})}
+              />
+            </TextField>
             <br />
             <br />
             <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
             <br />
             <br />
             {progress}
-            <Typography use="body1">{this.state.message}</Typography>
-            <Typography use="overline">{this.state.error}</Typography>
+            <Body1>{this.state.message}</Body1>
+            <Overline>{this.state.error}</Overline>
           </Cell>
         </Row>
       </Grid>;
