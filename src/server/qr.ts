@@ -77,7 +77,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
   return IMG_PREFIX + final_img.toString('base64');
 }
 
-export function decodeQR(url: string, password: string): ECData {
+export async function decodeQR(url: string, password: string): Promise<ECData> {
   const content = url.replace(URI_PREFIX, "");
   const metaData = JSON.parse(decodeURIComponent(content));
   return await decryptContent(metaData, password);
