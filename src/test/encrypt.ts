@@ -19,7 +19,7 @@ import {
 it(
   "encryptContent",
   async (): Promise<void> => {
-    const metaData = encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
+    const metaData = await encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
     chai.expect(metaData.data).to.not.be.empty;
     chai.expect(metaData.hash).to.not.be.empty;
     chai.expect(metaData.hint).to.equal("HINT");
@@ -30,7 +30,7 @@ it(
 it(
   "encryptContentFailure",
   async (): Promise<void> => {
-    chai.expect(() => encryptContent("HINT", "MESSAGE", "SHORT_PASSWORD", "192.168.0.1")).to.throw("BAD_PASSWORD");
+    chai.expect(async () => await encryptContent("HINT", "MESSAGE", "SHORT_PASSWORD", "192.168.0.1")).to.throw("BAD_PASSWORD");
   },
 );
 
@@ -49,12 +49,12 @@ it(
 it(
   "decryptContentFailure",
   async (): Promise<void> => {
-    const metaData = encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
-    chai.expect(() => decryptContent(metaData, "BAD_PASSWORD_BAD_PASSWORD_BAD_PASSWORD_")).to.throw("BAD_PASSWORD");
+    const metaData = await encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
+    chai.expect(async () => await decryptContent(metaData, "BAD_PASSWORD_BAD_PASSWORD_BAD_PASSWORD_")).to.throw("BAD_PASSWORD");
     metaData.hash = "BADHASH";
-    chai.expect(() => decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_HASH");
+    chai.expect(async () => await decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_HASH");
     metaData.version = 1;
-    chai.expect(() => decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_VERSION");
+    chai.expect(async () => await decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_VERSION");
   },
 );
 /* BESPOKE END <<custom>> */
