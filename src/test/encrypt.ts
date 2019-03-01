@@ -38,8 +38,8 @@ it(
   "decryptContent",
   async (): Promise<void> => {
     const password = "PASSWORDPASSWORDPASSWORDPASSWORD";
-    const metaData = encryptContent("HINT", "MESSAGE", password, "192.168.0.1");
-    const data = decryptContent(metaData, password);
+    const metaData = await encryptContent("HINT", "MESSAGE", password, "192.168.0.1");
+    const data = await decryptContent(metaData, password);
     chai.expect(data.created).to.not.be.empty;
     chai.expect(data.ip).to.equal("192.168.0.1");
     chai.expect(data.message).to.equal("MESSAGE");
