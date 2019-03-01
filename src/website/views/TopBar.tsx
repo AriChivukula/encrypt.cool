@@ -11,10 +11,8 @@ import * as React from "react";
 /* BESPOKE START <<imports>> */
 import * as cookie from "js-cookie";
 
-import {
-  SimpleTopAppBar,
-  TopAppBarFixedAdjust,
-} from "@rmwc/top-app-bar";
+import TopAppBar, {TopAppBarFixedAdjust} from "@material/react-top-app-bar";
+import MaterialIcon from "@material/react-material-icon";
 import {
   Url,
 } from "url";
@@ -34,13 +32,13 @@ class _TopBar extends React.Component<ITopBarProps> {
     /* BESPOKE START <<render>> */
     return (
       <>
-        <SimpleTopAppBar
+        <TopAppBar
           title={document.title}
           fixed={true}
-          navigationIcon={{
-            onClick: (): void => goto("https://github.com/AriChivukula/encrypt.cool/"),
-            icon: "code",
-          }}
+          navigationIcon={<MaterialIcon
+            onClick={(): void => goto("https://github.com/AriChivukula/encrypt.cool/")}
+            icon="code"
+          />}
         />
         <TopAppBarFixedAdjust />
       </>
