@@ -22,7 +22,7 @@ import {
   Body1,
   Overline,
 } from "@material/react-typography";
-import TextField, {Input} from '@material/react-text-field';
+import TextField, {HelperText, Input} from '@material/react-text-field';
 import Button from '@material/react-button';
 import LinearProgress from "@material/react-linear-progress";
 import {
@@ -87,6 +87,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
             <TextField
               fullWidth
               label="Hint (unsecured)"
+              helperText={<HelperText>Hint (unsecured)</HelperText>}
             >
               <Input
                value={this.state.hint}
@@ -99,6 +100,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
               textarea
               fullWidth
               label="Message (secured)"
+              helperText={<HelperText>Message (secured)</HelperText>}
             >
               <Input
                value={this.state.message}
@@ -110,6 +112,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
             <TextField
               fullWidth
               label="Password (16 character minimum)"
+              helperText={<HelperText>Password (16 character minimum)</HelperText>}
             >
               <Input
                value={this.state.password}
@@ -137,6 +140,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
             <TextField
               fullWidth
               label={metadata.hint}
+              helperText={<HelperText>{metadata.hint}</HelperText>}
             >
               <Input
                value={this.state.password}
