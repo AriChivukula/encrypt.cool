@@ -50,8 +50,7 @@ export async function encryptContent(hint: string, message: string, password: st
     version: 0,
   };
   const hmac_password = await client.read("encrypt.cool/data/TF_VAR_HMAC_PASSWORD");
-  console.log(hmac_password);
-  metaData.hash = Encrypter(hmac_password[""]).hmac(JSON.stringify(metaData));
+  metaData.hash = Encrypter(hmac_password["data"]["data"][""]).hmac(JSON.stringify(metaData));
   return metaData;
 }
 
@@ -63,8 +62,7 @@ export async function decryptContent(metaData: ECMetaData, password: string): Pr
   const hash = metaData.hash;
   metaData.hash = "";
   const hmac_password = await client.read("encrypt.cool/data/TF_VAR_HMAC_PASSWORD");
-  console.log(hmac_password);
-  if (Encrypter(hmac_password[""]).hmac(JSON.stringify(metaData)) !== hash) {
+  if (Encrypter(hmac_password["data"]["data"][""]).hmac(JSON.stringify(metaData)) !== hash) {
     throw new Error("BAD_HASH");
   }
   const data = Encrypter(password).decrypt(metaData.data);
