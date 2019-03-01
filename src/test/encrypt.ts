@@ -10,11 +10,14 @@
 import "mocha";
 
 import * as chai from "chai";
+import * as chaiAsPromised from "chai-as-promised";
 
 import {
   decryptContent,
   encryptContent,
 } from "../server/encrypt";
+
+chai.use(chaiAsPromised);
 
 it(
   "encryptContent",
@@ -30,7 +33,7 @@ it(
 it(
   "encryptContentFailure",
   async (): Promise<void> => {
-    chai.expect(async () => await encryptContent("HINT", "MESSAGE", "SHORT_PASSWORD", "192.168.0.1")).to.throw("BAD_PASSWORD");
+    chai.expect(encryptContent("HINT", "MESSAGE", "SHORT_PASSWORD", "192.168.0.1")).to.eventually.throw("BAD_PASSWORD");
   },
 );
 
@@ -50,11 +53,11 @@ it(
   "decryptContentFailure",
   async (): Promise<void> => {
     const metaData = await encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
-    chai.expect(async () => await decryptContent(metaData, "BAD_PASSWORD_BAD_PASSWORD_BAD_PASSWORD_")).to.throw("BAD_PASSWORD");
+    chai.expect(decryptContent(metaData, "BAD_PASSWORD_BAD_PASSWORD_BAD_PASSWORD_")).to.eventually.throw("BAD_PASSWORD");
     metaData.hash = "BADHASH";
-    chai.expect(async () => await decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_HASH");
+    chai.expect(decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.eventually.throw("BAD_HASH");
     metaData.version = 1;
-    chai.expect(async () => await decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_VERSION");
+    chai.expect(decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.eventually.throw("BAD_VERSION");
   },
 );
 /* BESPOKE END <<custom>> */
