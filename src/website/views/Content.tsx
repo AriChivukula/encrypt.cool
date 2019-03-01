@@ -89,6 +89,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
               label="Hint (unsecured)"
             >
               <Input
+               value={this.state.hint}
                onChange={(e: any) => this.setState({loading: false, error: "", image: "", hint: e.target.value})}
               />
             </TextField>
@@ -100,6 +101,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
               label="Message (secured)"
             >
               <Input
+               value={this.state.message}
                onChange={(e: any) => this.setState({loading: false, error: "", image: "", message: e.target.value})}
               />
             </TextField>
@@ -110,6 +112,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
               label="Password (16 character minimum)"
             >
               <Input
+               value={this.state.password}
                onChange={(e: any) => this.setState({loading: false, error: "", image: "", password: e.target.value})}
               />
             </TextField>
@@ -136,6 +139,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
               label={metadata.hint}
             >
               <Input
+               value={this.state.password}
                onChange={(e: any) => this.setState({loading: false, error: "", message: "", password: e.target.value})}
               />
             </TextField>
