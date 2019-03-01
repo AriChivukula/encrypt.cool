@@ -14,31 +14,17 @@ import {
 
 /* BESPOKE START <<imports>> */
 import {
-  Card,
-  CardMedia,
-  CardMediaContent,
-  CardPrimaryAction,
-} from "@rmwc/card";
-import {
+  Cell,
   Grid,
-  GridCell,
-} from "@rmwc/grid";
+  Row,
+} from "@material/react-layout-grid";
 import {
-  List,
-  SimpleListItem,
-} from "@rmwc/list";
-import {
-  Typography,
-} from "@rmwc/typography";
-import {
-  TextField,
-} from '@rmwc/textfield';
-import {
-  Button,
-} from '@rmwc/button';
-import {
-  LinearProgress,
-} from '@rmwc/linear-progress';
+  Body1,
+  Overline,
+} from "@material/react-typography";
+import TextField, {HelperText, Input} from '@material/react-text-field';
+import Button from '@material/react-button';
+import LinearProgress from "@material/react-linear-progress";
 import {
   Environment,
 } from "relay-runtime";
@@ -96,40 +82,44 @@ class _Content extends React.Component<IContentProps, IContentState> {
     }
     if (window.location.search === "") {
       return <Grid>
-        <GridCell span={12}>
-          <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", hint: e.target.value})} />
-          <br />
-          <br />
-          <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", message: e.target.value})} />
-          <br />
-          <br />
-          <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", password: e.target.value})} />
-          <br />
-          <br />
-          <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
-          <br />
-          <br />
-          {progress}
-          <img src={this.state.image} />
-          <Typography use="overline">{this.state.error}</Typography>
-        </GridCell>
+        <Row>
+          <Cell columns={12}>
+            <TextField fullwidth label="Hint (unsecured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", hint: e.target.value})} />
+            <br />
+            <br />
+            <TextField textarea fullwidth label="Message (secured)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", message: e.target.value})} />
+            <br />
+            <br />
+            <TextField fullwidth label="Password (16 character minimum)" onChange={(e: any) => this.setState({loading: false, error: "", image: "", password: e.target.value})} />
+            <br />
+            <br />
+            <Button onClick={() => this.generateQRCodeImage()}>Generate</Button>
+            <br />
+            <br />
+            {progress}
+            <img src={this.state.image} />
+            <Typography use="overline">{this.state.error}</Typography>
+          </Cell>
+        </Row>
       </Grid>;
     } else {
       const encodedMetadata = window.location.search.replace("?metadata=", "");
       const stringMetadata = decodeURIComponent(encodedMetadata);
       const metadata = JSON.parse(stringMetadata);
       return <Grid>
-        <GridCell span={12}>
-          <TextField fullwidth label={metadata.hint} onChange={(e: any) => this.setState({loading: false, error: "", message: "", password: e.target.value})} />
-          <br />
-          <br />
-          <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
-          <br />
-          <br />
-          {progress}
-          <Typography use="body1">{this.state.message}</Typography>
-          <Typography use="overline">{this.state.error}</Typography>
-        </GridCell>
+        <Row>
+          <Cell columns={12}>
+            <TextField fullwidth label={metadata.hint} onChange={(e: any) => this.setState({loading: false, error: "", message: "", password: e.target.value})} />
+            <br />
+            <br />
+            <Button onClick={() => this.decodeQRCodeURL()}>Decrypt</Button>
+            <br />
+            <br />
+            {progress}
+            <Typography use="body1">{this.state.message}</Typography>
+            <Typography use="overline">{this.state.error}</Typography>
+          </Cell>
+        </Row>
       </Grid>;
     }
     /* BESPOKE END <<render>> */
