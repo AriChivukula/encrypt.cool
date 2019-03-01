@@ -78,7 +78,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
     /* BESPOKE START <<render>> */
     var progress = <span />;
     if (this.state.loading) {
-      progress = <LinearProgress />;
+      progress = <LinearProgress indeterminate />;
     }
     if (window.location.search === "") {
       return <Grid>
