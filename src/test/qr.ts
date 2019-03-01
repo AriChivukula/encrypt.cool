@@ -33,7 +33,7 @@ it(
   "decodeQR",
   async (): Promise<void> => {
     const password = "PASSWORDPASSWORDPASSWORDPASSWORD";
-    const metaData = encryptContent("HINT", "MESSAGE", password, "192.168.0.1");
+    const metaData = await encryptContent("HINT", "MESSAGE", password, "192.168.0.1");
     const url = URI_PREFIX + encodeURIComponent(JSON.stringify(metaData));
     const data = decodeQR(url, password);
     chai.expect(data.created).to.not.be.empty;
