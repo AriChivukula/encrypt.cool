@@ -85,7 +85,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
         <Row>
           <Cell columns={12}>
             <TextField
-              fullwidth
+              fullWidth
               helperText={<HelperText>Hint (unsecured)</HelperText>}
             >
               <Input
@@ -96,7 +96,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
             <br />
             <TextField
               textarea
-              fullwidth
+              fullWidth
               helperText={<HelperText>Message (secured)</HelperText>}
             >
               <Input
@@ -106,7 +106,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
             <br />
             <br />
             <TextField
-              fullwidth
+              fullWidth
               helperText={<HelperText>Password (16 character minimum)</HelperText>}
             >
               <Input
@@ -132,7 +132,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
         <Row>
           <Cell columns={12}>
             <TextField
-              fullwidth
+              fullWidth
               helperText={<HelperText>{metadata.hint}</HelperText>}
             >
               <Input
