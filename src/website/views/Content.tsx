@@ -22,7 +22,7 @@ import {
   Body1,
   Overline,
 } from "@material/react-typography";
-import TextField, {HelperText, Input} from '@material/react-text-field';
+import TextField, {Input} from '@material/react-text-field';
 import Button from '@material/react-button';
 import LinearProgress from "@material/react-linear-progress";
 import {
@@ -86,7 +86,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
           <Cell columns={12}>
             <TextField
               fullWidth
-              helperText={<HelperText>Hint (unsecured)</HelperText>}
+              label="Hint (unsecured)"
             >
               <Input
                onChange={(e: any) => this.setState({loading: false, error: "", image: "", hint: e.target.value})}
@@ -97,7 +97,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
             <TextField
               textarea
               fullWidth
-              helperText={<HelperText>Message (secured)</HelperText>}
+              label="Message (secured)"
             >
               <Input
                onChange={(e: any) => this.setState({loading: false, error: "", image: "", message: e.target.value})}
@@ -107,7 +107,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
             <br />
             <TextField
               fullWidth
-              helperText={<HelperText>Password (16 character minimum)</HelperText>}
+              label="Password (16 character minimum)"
             >
               <Input
                onChange={(e: any) => this.setState({loading: false, error: "", image: "", password: e.target.value})}
@@ -133,7 +133,7 @@ class _Content extends React.Component<IContentProps, IContentState> {
           <Cell columns={12}>
             <TextField
               fullWidth
-              helperText={<HelperText>{metadata.hint}</HelperText>}
+              label={metadata.hint}
             >
               <Input
                onChange={(e: any) => this.setState({loading: false, error: "", message: "", password: e.target.value})}
