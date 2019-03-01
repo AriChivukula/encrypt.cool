@@ -8,10 +8,6 @@
 
 /* BESPOKE START <<custom>> */
 import "@babel/polyfill";
-require("honeycomb-beeline")({
-  writeKey: process.env.TF_VAR_HONEYCOMB,
-  dataset: process.env.TF_VAR_DOMAIN,
-});
 
 import lambda from "aws-serverless-express";
 import {

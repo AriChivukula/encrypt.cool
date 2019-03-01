@@ -10,16 +10,19 @@
 import "mocha";
 
 import * as chai from "chai";
+import chaiAsPromised from "chai-as-promised";
 
 import {
   decryptContent,
   encryptContent,
 } from "../server/encrypt";
 
+chai.use(chaiAsPromised);
+
 it(
   "encryptContent",
   async (): Promise<void> => {
-    const metaData = encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
+    const metaData = await encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
     chai.expect(metaData.data).to.not.be.empty;
     chai.expect(metaData.hash).to.not.be.empty;
     chai.expect(metaData.hint).to.equal("HINT");
@@ -30,7 +33,7 @@ it(
 it(
   "encryptContentFailure",
   async (): Promise<void> => {
-    chai.expect(() => encryptContent("HINT", "MESSAGE", "SHORT_PASSWORD", "192.168.0.1")).to.throw("BAD_PASSWORD");
+    chai.expect(encryptContent("HINT", "MESSAGE", "SHORT_PASSWORD", "192.168.0.1")).to.eventually.throw("BAD_PASSWORD");
   },
 );
 
@@ -38,8 +41,8 @@ it(
   "decryptContent",
   async (): Promise<void> => {
     const password = "PASSWORDPASSWORDPASSWORDPASSWORD";
-    const metaData = encryptContent("HINT", "MESSAGE", password, "192.168.0.1");
-    const data = decryptContent(metaData, password);
+    const metaData = await encryptContent("HINT", "MESSAGE", password, "192.168.0.1");
+    const data = await decryptContent(metaData, password);
     chai.expect(data.created).to.not.be.empty;
     chai.expect(data.ip).to.equal("192.168.0.1");
     chai.expect(data.message).to.equal("MESSAGE");
@@ -49,12 +52,12 @@ it(
 it(
   "decryptContentFailure",
   async (): Promise<void> => {
-    const metaData = encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
-    chai.expect(() => decryptContent(metaData, "BAD_PASSWORD_BAD_PASSWORD_BAD_PASSWORD_")).to.throw("BAD_PASSWORD");
+    const metaData = await encryptContent("HINT", "MESSAGE", "PASSWORDPASSWORDPASSWORDPASSWORD", "192.168.0.1");
+    chai.expect(decryptContent(metaData, "BAD_PASSWORD_BAD_PASSWORD_BAD_PASSWORD_")).to.eventually.throw("BAD_PASSWORD");
     metaData.hash = "BADHASH";
-    chai.expect(() => decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_HASH");
+    chai.expect(decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.eventually.throw("BAD_HASH");
     metaData.version = 1;
-    chai.expect(() => decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.throw("BAD_VERSION");
+    chai.expect(decryptContent(metaData, "PASSWORDPASSWORDPASSWORDPASSWORD")).to.eventually.throw("BAD_VERSION");
   },
 );
 /* BESPOKE END <<custom>> */

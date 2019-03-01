@@ -33,7 +33,7 @@ export async function genRoot(
       return { data };
     },
     decodeQRCodeURL: async ({ input }: { input: { url: string, password: string } }): Promise<{ message: string }> => {
-      const data = decodeQR(input.url, input.password);
+      const data = await decodeQR(input.url, input.password);
       return { message: data.message };
     },
   };
