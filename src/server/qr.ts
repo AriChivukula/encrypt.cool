@@ -80,7 +80,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
 export function decodeQR(url: string, password: string): ECData {
   const content = url.replace(URI_PREFIX, "");
   const metaData = JSON.parse(decodeURIComponent(content));
-  return decryptContent(metaData, password);
+  return await decryptContent(metaData, password);
 }
 
 /* BESPOKE END <<custom>> */
