@@ -94,5 +94,8 @@
     "typescriptase": "0.7.5",
     "uglifyify": "5.0.1",
     "vinyl-source-stream": "2.0.0"
+  },
+  "resolutions": {
+    "@types/react": "16.8.8"
   }
 }
