@@ -48,7 +48,7 @@ data "aws_subnet_ids" "ob_subnet" {
   vpc_id = "${data.aws_vpc.ob_vpc.id}"
   tags {
     Name = "aol"
-    Type = "Public"
+    Type = "Private"
   }
 }
 
