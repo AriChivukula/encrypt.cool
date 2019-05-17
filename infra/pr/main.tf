@@ -56,7 +56,7 @@ resource "aws_lambda_function" "ob_lambda" {
   function_name = "${null_resource.intermediates.triggers.function_name}"
   handler = "index.handler"
   role = "${data.aws_iam_role.ob_iam.arn}"
-  runtime = "nodejs8.10"
+  runtime = "nodejs10.x"
   memory_size = 256
   timeout = 300
   filename = "dynamic.zip"
