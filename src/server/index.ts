@@ -1,13 +1,5 @@
-/**
- * This file is partially generated; only edit bespoke sections.
- *
- * SOURCE<<gen/server.ts::index>>
- * BESPOKE<<custom>>
- * SIGNED<<J9FCy5Eb9w0afcgAaRFGr3gxQY8sbFhMkYnvR4PLOLGutLf1jQN3nT49Pgi/UgT8KqpaBJanNZoyEo3inVMTZQ==>>
- */
-
-/* BESPOKE START <<custom>> */
-import "@babel/polyfill";
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
 import lambda from "aws-serverless-express";
 import {
@@ -61,4 +53,3 @@ export function handler(
     context,
   );
 }
-/* BESPOKE END <<custom>> */
