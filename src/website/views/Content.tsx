@@ -1,18 +1,9 @@
-/**
- * This file is partially generated; only edit bespoke sections.
- *
- * SOURCE<<gen/website.ts::Content>>
- * BESPOKE<<imports, state, render, implementation>>
- * SIGNED<<seSd0V7tlRsuDlrJjvcCOGedLoLzSaj4uGe/hnj4z4+pcMqnBbLm1zw/OnzYDwXCQTxnzyanQaEC1mDBPYFAnQ==>>
- */
-
 import * as React from "react";
 import {
   commitMutation,
   graphql,
 } from "react-relay";
 
-/* BESPOKE START <<imports>> */
 import {
   Cell,
   Grid,
@@ -38,7 +29,6 @@ import {
 import {
   ContentDecodeQRCodeURLMutationResponse,
 } from "./__generated__/ContentDecodeQRCodeURLMutation.graphql";
-/* BESPOKE END <<imports>> */
 
 export interface IContentProps {
   environment: Environment;
@@ -61,7 +51,6 @@ class _Content extends React.Component<IContentProps, IContentState> {
   ) {
     super(props);
     this.state = {
-      /* BESPOKE START <<state>> */
       hint: "",
       message: "",
       password: "",
@@ -69,13 +58,11 @@ class _Content extends React.Component<IContentProps, IContentState> {
       url: window.location.href,
       error: "",
       loading: false,
-      /* BESPOKE END <<state>> */
     };
   }
 
   public render(
   ): JSX.Element {
-    /* BESPOKE START <<render>> */
     var progress = <span />;
     if (this.state.loading) {
       progress = <LinearProgress indeterminate />;
@@ -159,10 +146,8 @@ class _Content extends React.Component<IContentProps, IContentState> {
         </Row>
       </Grid>;
     }
-    /* BESPOKE END <<render>> */
   }
 
-  /* BESPOKE START <<implementation>> */
   private generateQRCodeImage(): void {
     this.setState({
       loading: true,
@@ -177,9 +162,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
             }
           }
         `,
-        onCompleted: (response: ContentGenerateQRCodeImageMutationResponse): void => {
+        onCompleted: (response: unknown): void => {
           this.setState({
-            image: response.generateQRCodeImage.data,
+            image: (response as ContentGenerateQRCodeImageMutationResponse).generateQRCodeImage.data,
             error: "",
             loading: false,
           });
@@ -216,9 +201,9 @@ class _Content extends React.Component<IContentProps, IContentState> {
             }
           }
         `,
-        onCompleted: (response: ContentDecodeQRCodeURLMutationResponse): void => {
+        onCompleted: (response: unknown): void => {
           this.setState({
-            message: response.decodeQRCodeURL.message,
+            message: (response as ContentDecodeQRCodeURLMutationResponse).decodeQRCodeURL.message,
             error: "",
             loading: false,
           });
@@ -239,7 +224,6 @@ class _Content extends React.Component<IContentProps, IContentState> {
       },
     );
   }
-  /* BESPOKE END <<implementation>> */
 }
 
 export { _Content as Content };
