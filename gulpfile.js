@@ -13,6 +13,11 @@ var pkg = require("./package.json");
 var project = ts.createProject("tsconfig.json", { module: "ES2015", target: "ES2015" });
 
 gulp.task(
+  "build:1:ts-relay",
+  shell.task("relay-compiler --src src/ --schema src/server/schema.graphql --language typescript --watchman false"),
+);
+
+gulp.task(
   "build:1:typescript",
   () => gulp.src(["src/**/*.@(ts|tsx)"])
     .pipe(project())
@@ -28,6 +33,7 @@ gulp.task(
 gulp.task(
   "build:1",
   gulp.series(
+    "build:1:ts-relay",
     "build:1:typescript",
     "build:1:relay",
   ),

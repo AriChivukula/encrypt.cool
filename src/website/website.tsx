@@ -1,12 +1,3 @@
-/**
- * This file is partially generated; only edit bespoke sections.
- *
- * SOURCE<<gen/website.ts::website>>
- * BESPOKE<<custom>>
- * SIGNED<<J9FCy5Eb9w0afcgAaRFGr3gxQY8sbFhMkYnvR4PLOLGutLf1jQN3nT49Pgi/UgT8KqpaBJanNZoyEo3inVMTZQ==>>
- */
-
-/* BESPOKE START <<custom>> */
 import * as cookie from "js-cookie";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -22,6 +13,7 @@ import {
 } from "react-router-dom";
 import {
   Environment,
+  INetwork,
   RecordSource,
   Store,
 } from "relay-runtime";
@@ -39,7 +31,7 @@ export function render(
   const environment: Environment = new Environment({
     network: new RelayNetworkLayer([
       urlMiddleware({ url: apiURL }),
-    ]),
+    ]) as INetwork,
     store: new Store(new RecordSource()),
   });
   const renderer: () => JSX.Element = (): JSX.Element => <Root environment={environment} />;
@@ -54,4 +46,3 @@ export function render(
     document.getElementById("root"),
   );
 }
-/* BESPOKE END <<custom>> */
