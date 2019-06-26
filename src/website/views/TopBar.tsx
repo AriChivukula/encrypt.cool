@@ -39,7 +39,7 @@ class _TopBar extends React.Component<ITopBarProps> {
               <TopAppBarTitle>{document.title}</TopAppBarTitle>
             </TopAppBarSection>
           </TopAppBarRow>
-        <TopAppBar />
+        </TopAppBar>
         <TopAppBarFixedAdjust />
       </>
     );
