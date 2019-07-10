@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.5.4",
-    "@babel/preset-env": "7.5.3",
+    "@babel/preset-env": "7.5.4",
     "@material/react-button": "0.11.0",
     "@material/react-layout-grid": "0.14.1",
     "@material/react-linear-progress": "0.14.1",
@@ -62,7 +62,7 @@
     "@types/react-relay": "5.0.0",
     "@types/react-router-dom": "4.3.4",
     "@types/relay-runtime": "5.0.1",
-    "@types/request-ip": "0.0.33",
+    "@types/request-ip": "0.0.34",
     "@types/sharp": "0.22.2",
     "babel-plugin-relay": "5.0.0",
     "chai": "4.2.0",
