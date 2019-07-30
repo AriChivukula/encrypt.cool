@@ -1,12 +1,3 @@
-/**
- * This file is partially generated; only edit bespoke sections.
- *
- * SOURCE<<gen/server.ts::qr>>
- * BESPOKE<<custom>>
- * SIGNED<<J9FCy5Eb9w0afcgAaRFGr3gxQY8sbFhMkYnvR4PLOLGutLf1jQN3nT49Pgi/UgT8KqpaBJanNZoyEo3inVMTZQ==>>
- */
-
-/* BESPOKE START <<custom>> */
 import {
   toDataURL,
 } from "qrcode";
@@ -55,23 +46,18 @@ export async function encodeQR(hint: string, message: string, password: string, 
     .png()
     .toBuffer();
   let final_img = await sharp(color_img)
-    .overlayWith(
-      white_img,
+    .composit([
       {
+        input: white_img,
         top: 15,
         left: 15,
       },
-    )
-    .png()
-    .toBuffer();
-  final_img = await sharp(final_img)
-    .overlayWith(
-      data_img,
       {
+        input: data_img,
         top: 30,
         left: 30,
       },
-    )
+    ])
     .png()
     .toBuffer();
   return IMG_PREFIX + final_img.toString('base64');
@@ -82,5 +68,3 @@ export async function decodeQR(url: string, password: string): Promise<ECData> {
   const metaData = JSON.parse(decodeURIComponent(content));
   return await decryptContent(metaData, password);
 }
-
-/* BESPOKE END <<custom>> */
