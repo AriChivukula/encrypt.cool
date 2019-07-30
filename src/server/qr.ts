@@ -46,7 +46,7 @@ export async function encodeQR(hint: string, message: string, password: string, 
     .png()
     .toBuffer();
   let final_img = await sharp(color_img)
-    .composit([
+    .composite([
       {
         input: white_img,
         top: 15,
