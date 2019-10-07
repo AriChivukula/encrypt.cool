@@ -4,7 +4,6 @@ import * as ReactDOM from "react-dom";
 import {
   RelayNetworkLayer,
   urlMiddleware,
-// @ts-ignore
 } from "react-relay-network-modern";
 import {
   BrowserRouter,
@@ -13,7 +12,6 @@ import {
 } from "react-router-dom";
 import {
   Environment,
-  INetwork,
   RecordSource,
   Store,
 } from "relay-runtime";
@@ -29,9 +27,10 @@ export function render(
   apiURL: string,
 ): void {
   const environment: Environment = new Environment({
+    // @ts-ignore
     network: new RelayNetworkLayer([
       urlMiddleware({ url: apiURL }),
-    ]) as INetwork,
+    ]),
     store: new Store(new RecordSource()),
   });
   const renderer: () => JSX.Element = (): JSX.Element => <Root environment={environment} />;
