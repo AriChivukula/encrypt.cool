@@ -4,7 +4,6 @@ import * as ReactDOM from "react-dom";
 import {
   RelayNetworkLayer,
   urlMiddleware,
-// @ts-ignore
 } from "react-relay-network-modern";
 import {
   BrowserRouter,
