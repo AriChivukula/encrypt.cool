@@ -12,7 +12,6 @@ import {
 } from "react-router-dom";
 import {
   Environment,
-  INetwork,
   RecordSource,
   Store,
 } from "relay-runtime";
@@ -30,7 +29,7 @@ export function render(
   const environment: Environment = new Environment({
     network: new RelayNetworkLayer([
       urlMiddleware({ url: apiURL }),
-    ]) as INetwork,
+    ]),
     store: new Store(new RecordSource()),
   });
   const renderer: () => JSX.Element = (): JSX.Element => <Root environment={environment} />;
