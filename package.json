@@ -64,7 +64,7 @@
     "@types/relay-runtime": "6.0.9",
     "@types/request-ip": "0.0.34",
     "@types/sharp": "0.23.0",
-    "babel-plugin-relay": "6.0.0",
+    "babel-plugin-relay": "7.1.0",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "graphql-compiler": "1.7.0",
