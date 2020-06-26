@@ -24,7 +24,7 @@
     "express-bearer-token": "2.4.0",
     "express-graphql": "0.9.0",
     "graphql": "14.6.0",
-    "helmet": "3.23.1",
+    "helmet": "3.23.2",
     "node-vault": "0.9.18",
     "qrcode": "1.4.4",
     "request-ip": "2.1.3",
