@@ -16,7 +16,7 @@
     "spec": ["src/test/*.ts"]
   },
   "dependencies": {
-    "@babel/polyfill": "7.10.1",
+    "@babel/polyfill": "7.10.4",
     "aws-serverless-express": "3.3.8",
     "body-parser": "1.19.0",
     "cors": "2.8.5",
@@ -32,7 +32,7 @@
     "simple-encryptor": "4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.10.3",
+    "@babel/core": "7.10.4",
     "@babel/preset-env": "7.10.4",
     "@material/react-button": "0.15.0",
     "@material/react-layout-grid": "0.15.0",
@@ -81,7 +81,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-relay": "9.1.0",
-    "react-relay-network-modern": "4.7.2",
+    "react-relay-network-modern": "4.7.3",
     "react-router-dom": "5.2.0",
     "relay-compiler": "9.1.0",
     "relay-compiler-language-typescript": "12.0.3",
@@ -89,7 +89,7 @@
     "rollup-plugin-uglify": "6.0.4",
     "rollup-stream": "1.24.1",
     "ts-node": "8.10.2",
-    "typescript": "3.9.5",
+    "typescript": "3.9.6",
     "uglifyify": "5.0.2",
     "vinyl-source-stream": "2.0.0"
   }
