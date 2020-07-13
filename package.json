@@ -23,7 +23,7 @@
     "express": "4.17.1",
     "express-bearer-token": "2.4.0",
     "express-graphql": "0.10.2",
-    "graphql": "14.6.0",
+    "graphql": "14.7.0",
     "helmet": "3.23.3",
     "node-vault": "0.9.18",
     "qrcode": "1.4.4",
