@@ -1,4 +1,6 @@
-import Encrypter from "simple-encryptor";
+import {
+  createEncryptor,
+} from "simple-encryptor";
 import vault from "node-vault";
 
 export type ECData = {
@@ -34,13 +36,13 @@ export async function encryptContent(hint: string, message: string, password: st
     message,
   };
   const metaData = {
-    data: Encrypter(password).encrypt(data),
+    data: createEncryptor(password).encrypt(data),
     hash: "",
     hint,
     version: 0,
   };
   const hmac_password = await client.read("encrypt.cool/data/TF_VAR_HMAC_PASSWORD");
-  metaData.hash = Encrypter(hmac_password["data"]["data"][""]).hmac(JSON.stringify(metaData));
+  metaData.hash = createEncryptor(hmac_password["data"]["data"][""]).hmac(JSON.stringify(metaData));
   return metaData;
 }
 
@@ -52,10 +54,10 @@ export async function decryptContent(metaData: ECMetaData, password: string): Pr
   const hash = metaData.hash;
   metaData.hash = "";
   const hmac_password = await client.read("encrypt.cool/data/TF_VAR_HMAC_PASSWORD");
-  if (Encrypter(hmac_password["data"]["data"][""]).hmac(JSON.stringify(metaData)) !== hash) {
+  if (createEncryptor(hmac_password["data"]["data"][""]).hmac(JSON.stringify(metaData)) !== hash) {
     throw new Error("BAD_HASH");
   }
-  const data = Encrypter(password).decrypt(metaData.data);
+  const data = createEncryptor(password).decrypt(metaData.data);
   if (data === null) {
     throw new Error("BAD_PASSWORD");
   }
