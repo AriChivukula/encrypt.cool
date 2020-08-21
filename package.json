@@ -32,7 +32,7 @@
     "simple-encryptor": "4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.11.1",
+    "@babel/core": "7.11.4",
     "@babel/preset-env": "7.11.0",
     "@material/react-button": "0.15.0",
     "@material/react-layout-grid": "0.15.0",
