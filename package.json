@@ -62,7 +62,7 @@
     "@types/request-ip": "0.0.35",
     "@types/sharp": "0.27.1",
     "babel-plugin-relay": "9.1.0",
-    "chai": "4.2.0",
+    "chai": "4.3.0",
     "chai-as-promised": "7.1.1",
     "graphql-compiler": "1.7.0",
     "gulp": "4.0.2",
